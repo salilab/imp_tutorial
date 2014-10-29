@@ -53,21 +53,21 @@ domains=[("Rpb1",  "Rpb1_1",       0.0,     datadirectory+"1WCM.fasta.txt", "1WC
 
 
        # compname  hier_name    color         fastafile              fastaid          pdbname      chain    resrange                                     read    "BEADS"ize rigid_body super_rigid_body emnum_components emtxtfilename  emmrcfilename chain of super rigid bodies
-domains=[("Rpb1",  "Rpb1_1",       0.0,     datadirectory+"1WCM.fasta.txt", "1WCM:A|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "A",  (1,1140),    None,          5,       None,                 None,     -40,   datadirectory+"Rpb1_1.txt",  datadirectory+"Rpb1_1.mrc",   None),
-         ("Rpb1",  "Rpb1_2",       0.0,     datadirectory+"1WCM.fasta.txt", "1WCM:A|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "A",  (1141,1274), None,          5,       None,                 None,     -40,   datadirectory+"Rpb1_2.txt",  datadirectory+"Rpb1_2.mrc",   None),
-         ("Rpb1",  "Rpb1_3",       0.0,     datadirectory+"1WCM.fasta.txt", "1WCM:A|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "A",  (1275,-1),   None,          5,       None,                 None,     -40,   datadirectory+"Rpb1_3.txt",  datadirectory+"Rpb1_3.mrc",   None),
-         ("Rpb2",  "Rpb2_1",       1.0,     datadirectory+"1WCM.fasta.txt", "1WCM:B|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "B",  (1,1102),    None,          5,       None,                 None,     -40,   datadirectory+"Rpb2_1.txt",  datadirectory+"Rpb2_1.mrc",   None),
-         ("Rpb2",  "Rpb2_2",       1.0,     datadirectory+"1WCM.fasta.txt", "1WCM:B|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "B",  (1103,-1),   None,          5,       None,                 None,     -40,   datadirectory+"Rpb2_2.txt",  datadirectory+"Rpb2_2.mrc",   None),
-         ("Rpb3",  "Rpb3",         0.2,     datadirectory+"1WCM.fasta.txt", "1WCM:C|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "C",  (1,-1),      None,          5,       None,                 None,       -40,     datadirectory+"Rpb3.txt",  datadirectory+"Rpb3.mrc",   None),
-         ("Rpb4",  "Rpb4",         0.3,     datadirectory+"1WCM.fasta.txt", "1WCM:D|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "D",  (1,-1),      False,          5,       4,                 [0,5],       -40,     datadirectory+"Rpb4.txt",  datadirectory+"Rpb4.mrc",     [3]),
-         ("Rpb5",  "Rpb5",         0.4,     datadirectory+"1WCM.fasta.txt", "1WCM:E|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "E",  (1,-1),      None,          5,       None,                 None,       -40,     datadirectory+"Rpb5.txt",  datadirectory+"Rpb5.mrc",   None),
-         ("Rpb6",  "Rpb6",         0.5,     datadirectory+"1WCM.fasta.txt", "1WCM:F|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "F",  (1,-1),      None,          5,       None,                 None,       -40,     datadirectory+"Rpb6.txt",  datadirectory+"Rpb6.mrc",   None),
-         ("Rpb7",  "Rpb7",         0.6,     datadirectory+"1WCM.fasta.txt", "1WCM:G|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "G",  (1,-1),      False,          5,       7,                 [0,8],       -40,     datadirectory+"Rpb7.txt",  datadirectory+"Rpb7.mrc",     [6]),
-         ("Rpb8",  "Rpb8",         0.7,     datadirectory+"1WCM.fasta.txt", "1WCM:H|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "H",  (1,-1),      None,          5,       None,                 None,       -40,     datadirectory+"Rpb8.txt",  datadirectory+"Rpb8.mrc",   None),
-         ("Rpb9",  "Rpb9",         0.8,     datadirectory+"1WCM.fasta.txt", "1WCM:I|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "I",  (1,-1),      None,          5,       None,                 None,      -40,    datadirectory+"Rpb9.txt",  datadirectory+"Rpb9.mrc",     None),
-         ("Rpb10", "Rpb10",        0.9,     datadirectory+"1WCM.fasta.txt", "1WCM:J|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "J",  (1,-1),      None,          5,       None,                 None,      -40,    datadirectory+"Rpb10.txt",  datadirectory+"Rpb10.mrc",   None),
-         ("Rpb11", "Rpb11",        0.1,     datadirectory+"1WCM.fasta.txt", "1WCM:K|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "K",  (1,-1),      None,          5,       None,                 None,      -40,    datadirectory+"Rpb11.txt",  datadirectory+"Rpb11.mrc",   None),
-         ("Rpb12", "Rpb12",        0.35,    datadirectory+"1WCM.fasta.txt", "1WCM:L|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "L",  (1,-1),      None,          5,       None,                 None,      -40,    datadirectory+"Rpb12.txt",  datadirectory+"Rpb12.mrc",   None)]
+domains=[("Rpb1",  "Rpb1_1",       0.0,     datadirectory+"1WCM.fasta.txt", "1WCM:A|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "A",  (1,1140),    None,          10,       None,                 None,     -40,   datadirectory+"Rpb1_1.txt",  datadirectory+"Rpb1_1.mrc",   None),
+         ("Rpb1",  "Rpb1_2",       0.0,     datadirectory+"1WCM.fasta.txt", "1WCM:A|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "A",  (1141,1274), None,          10,       None,                 None,     -40,   datadirectory+"Rpb1_2.txt",  datadirectory+"Rpb1_2.mrc",   None),
+         ("Rpb1",  "Rpb1_3",       0.0,     datadirectory+"1WCM.fasta.txt", "1WCM:A|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "A",  (1275,-1),   None,          10,       None,                 None,     -40,   datadirectory+"Rpb1_3.txt",  datadirectory+"Rpb1_3.mrc",   None),
+         ("Rpb2",  "Rpb2_1",       1.0,     datadirectory+"1WCM.fasta.txt", "1WCM:B|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "B",  (1,1102),    None,          10,       None,                 None,     -40,   datadirectory+"Rpb2_1.txt",  datadirectory+"Rpb2_1.mrc",   None),
+         ("Rpb2",  "Rpb2_2",       1.0,     datadirectory+"1WCM.fasta.txt", "1WCM:B|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "B",  (1103,-1),   None,          10,       None,                 None,     -40,   datadirectory+"Rpb2_2.txt",  datadirectory+"Rpb2_2.mrc",   None),
+         ("Rpb3",  "Rpb3",         0.2,     datadirectory+"1WCM.fasta.txt", "1WCM:C|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "C",  (1,-1),      None,          10,       None,                 None,       -40,     datadirectory+"Rpb3.txt",  datadirectory+"Rpb3.mrc",   None),
+         ("Rpb4",  "Rpb4",         0.3,     datadirectory+"1WCM.fasta.txt", "1WCM:D|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "D",  (1,-1),      True,          10,       4,                 [0,5],       -40,     datadirectory+"Rpb4.txt",  datadirectory+"Rpb4.mrc",     [3]),
+         ("Rpb5",  "Rpb5",         0.4,     datadirectory+"1WCM.fasta.txt", "1WCM:E|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "E",  (1,-1),      None,          10,       None,                 None,       -40,     datadirectory+"Rpb5.txt",  datadirectory+"Rpb5.mrc",   None),
+         ("Rpb6",  "Rpb6",         0.5,     datadirectory+"1WCM.fasta.txt", "1WCM:F|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "F",  (1,-1),      None,          10,       None,                 None,       -40,     datadirectory+"Rpb6.txt",  datadirectory+"Rpb6.mrc",   None),
+         ("Rpb7",  "Rpb7",         0.6,     datadirectory+"1WCM.fasta.txt", "1WCM:G|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "G",  (1,-1),      True,          10,       7,                 [0,8],       -40,     datadirectory+"Rpb7.txt",  datadirectory+"Rpb7.mrc",     [6]),
+         ("Rpb8",  "Rpb8",         0.7,     datadirectory+"1WCM.fasta.txt", "1WCM:H|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "H",  (1,-1),      None,          10,       None,                 None,       -40,     datadirectory+"Rpb8.txt",  datadirectory+"Rpb8.mrc",   None),
+         ("Rpb9",  "Rpb9",         0.8,     datadirectory+"1WCM.fasta.txt", "1WCM:I|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "I",  (1,-1),      None,          10,       None,                 None,      -40,    datadirectory+"Rpb9.txt",  datadirectory+"Rpb9.mrc",     None),
+         ("Rpb10", "Rpb10",        0.9,     datadirectory+"1WCM.fasta.txt", "1WCM:J|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "J",  (1,-1),      None,          10,       None,                 None,      -40,    datadirectory+"Rpb10.txt",  datadirectory+"Rpb10.mrc",   None),
+         ("Rpb11", "Rpb11",        0.1,     datadirectory+"1WCM.fasta.txt", "1WCM:K|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "K",  (1,-1),      None,          10,       None,                 None,      -40,    datadirectory+"Rpb11.txt",  datadirectory+"Rpb11.mrc",   None),
+         ("Rpb12", "Rpb12",        0.35,    datadirectory+"1WCM.fasta.txt", "1WCM:L|PDBID|CHAIN|SEQUENCE",  datadirectory+"1WCM_map_fitted.pdb", "L",  (1,-1),      None,          10,       None,                 None,      -40,    datadirectory+"Rpb12.txt",  datadirectory+"Rpb12.mrc",   None)]
 
 
 
@@ -81,7 +81,7 @@ resdensities=bm.get_density_hierarchies([t[1] for t in domains])
 
 # randomize the initial configuration
 
-#simo.shuffle_configuration(100)
+simo.shuffle_configuration(50)
 
 # defines the movers
 
@@ -128,7 +128,7 @@ xl1.add_to_model()
 xl1.set_label("Trnka")
 sampleobjects.append(xl1)
 outputobjects.append(xl1)
-xl1.set_psi_is_sampled(False)
+xl1.set_psi_is_sampled(True)
 psi=xl1.get_psi(1.0)[0]
 psi.set_scale(0.05)
 
@@ -156,7 +156,7 @@ xl2.add_to_model()
 xl2.set_label("Chen")
 sampleobjects.append(xl2)
 outputobjects.append(xl2)
-xl2.set_psi_is_sampled(False)
+xl2.set_psi_is_sampled(True)
 psi=xl2.get_psi(1.0)[0]
 psi.set_scale(0.05)
 
@@ -188,7 +188,7 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     monte_carlo_temperature=1.0,
                                     replica_exchange_minimum_temperature=1.0,
                                     replica_exchange_maximum_temperature=2.5,
-                                    number_of_best_scoring_models=500,
+                                    number_of_best_scoring_models=0,
                                     monte_carlo_steps=10,
                                     number_of_frames=20000,
                                     write_initial_rmf=True,
