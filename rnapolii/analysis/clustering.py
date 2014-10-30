@@ -3,7 +3,7 @@ import IMP.pmi
 import IMP.pmi.macros
 import sys
 
-is_mpi=True
+is_mpi=False
 
 model=IMP.Model()
 
@@ -11,8 +11,8 @@ model=IMP.Model()
 
 mc=IMP.pmi.macros.AnalysisReplicaExchange0(model,
                                         stat_file_name_suffix="stat",     # don't change
-                                        merge_directories=["../modeling.1","../modeling.2","../modeling.3","../modeling.4"], # change this list splitting the runs or adding new runs
-                                        global_output_directory="./post-EM/", # don't change
+                                        merge_directories=["../modeling/"], # change this list splitting the runs or adding new runs
+                                        global_output_directory="./output/", # don't change
                                         rmf_dir="rmfs/")  # don't change
 
 # fields that have to be extracted for the stat file
@@ -32,16 +32,8 @@ feature_list=["ISDCrossLinkMS_Distance_intrarb",
 
 # list of component names needed to calculate the RMSD for the clustering
 
-components_names=["Rpb1",
-                  "Rpb2",
-                  "Rpb3",
-                  "Rpb4",
-                  "Rpb5",
-                  "Rpb6",
-                  "Rpb7",
-                  "Rpb10",
-                  "Rpb11",
-                  "Rpb12"]
+components_names=["Rpb4",
+                  "Rpb7"]
 
 density_names={}
 rmsd_names={}
@@ -53,14 +45,14 @@ nclusters=1                                        # number of clusters needed b
 mc.clustering("SimplifiedModel_Total_Score_None",  # don't change, field where to find the score
               "rmf_file",                          # don't change, field where to find the path for the rmf_file
               "rmf_frame_index",                   # don't change, field for the frame index
-              prefiltervalue=125.9189,              # prefilter the models by score
-              number_of_best_scoring_models=200,   # number of models to be clustered
+              prefiltervalue=2900.0,              # prefilter the models by score
+              number_of_best_scoring_models=50,   # number of models to be clustered
               alignment_components=None,           # don't change, (list of proteins you want to use for structural alignment
               rmsd_calculation_components=rmsd_names, # list of proteins used to calculated the rmsd
               distance_matrix_file="distance.rawmatrix.pkl", # save the distance matrix
-              outputdir="kmeans_500_"+str(nclusters)+"/",  # directory name for the clustering
+              outputdir="kmeans_50_"+str(nclusters)+"/",  # directory name for the clustering
               feature_keys=feature_list,                     # extract these fields from the stat file
-              load_distance_matrix_file=True,                # skip the matrix calcuklation and read the precalculated matrix
+              load_distance_matrix_file=False,                # skip the matrix calcuklation and read the precalculated matrix
               skip_clustering=False,                         # skip clustering
               display_plot=False,                            # display the heat map plot of the distance matrix
               exit_after_display=False,                      # exit after having displayed the distance matrix plot
