@@ -1,0 +1,56 @@
+topology_file topology.txt	
+
+MonteCarloMovers
+	# Specify domain names to move
+	# By default, unknown-structure parts of rigid bodies will move flexibly
+	# Domains can only appear once in the rigid bodies list
+	# Super-rigid bodies are greedy (grabs entire rigid body)
+	rigid_bodies # each line always moves together
+		Rpb4
+		Rpb7
+		Rpb1_1 Rpb1_2 Rpb1_3
+	super_rigid_bodies # sometimes move together     
+		Rpb4 Rpb7
+          	Rpb1_1 Rpb4
+		# Rpb5 this would cause an error
+Restraints
+	# automatically we add excluded volume and chain connectivity
+	Crosslink
+		file xxx.csv
+		length
+		label
+		columnmap
+			protein1 pep1.accession
+			protein2 pep1.accession
+			residue1 pep1.xlinked_aa
+			residue2 pep2.xlinked_aa
+	Crosslink
+		file xxx.csv
+		length
+		label
+		columnmap
+			protein1 pep1.accession
+			protein2 pep1.accession
+			residue1 pep1.xlinked_aa
+			residue2 pep2.xlinked_aa
+	EM
+		gmm_file
+		components LIST
+		scale_to_mass True
+		slope
+		weight 100.0
+Initialization
+	randomize 50
+	optimize 10
+Sampling
+	nframes
+	rigid_body
+		max_trans
+		max_rot
+	floppy_body
+		max_trans
+	simulated_annealing
+		min_temp
+		max_temp
+		min_temp_nframes
+		max_temp_nframes
