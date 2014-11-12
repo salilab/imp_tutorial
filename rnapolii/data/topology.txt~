@@ -1,8 +1,9 @@
 |directories|
-|pdb_dir|data/pdbs|
-|fasta_dir|data/sequences|
-|gmm_dir|data/gmms|
+|pdb_dir|./|
+|fasta_dir|./|
+|gmm_dir|./|
 
+|topology_dictionary|
 |component_name|domain_name|fasta_fn|fasta_id|pdb_fn|chain|residue_range|pdb_offset|bead_size|em_residues_per_gaussian|
 |Rpb1 |Rpb1_1|1WCM.fasta.txt|1WCM:A|1WCM_map_fitted.pdb|A|1,1140   |0|5|0 |
 |Rpb1 |Rpb1_2|1WCM.fasta.txt|1WCM:A|1WCM_map_fitted.pdb|A|1141,1274|0|5|0 |

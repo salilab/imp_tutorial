@@ -74,7 +74,7 @@ domains=[("Rpb1",  "Rpb1_1",       0.0,     datadirectory+"1WCM.fasta.txt", "1WC
 
 
 bm=IMP.pmi.macros.BuildModel1(simo)
-bm.build_model(domains)
+bm.build_model(data_structure=domains)
 bm.scale_bead_radii(40,0.8)
 
 resdensities=bm.get_density_hierarchies([t[1] for t in domains])
