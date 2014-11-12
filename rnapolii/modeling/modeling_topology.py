@@ -72,7 +72,7 @@ simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedleng
 bm=IMP.pmi.macros.BuildModel1(simo)
 
 # Create list of components from topology file
-topology=IMP.pmi.topology.topology_io.Topology(topology_file)
+topology=IMP.pmi.topology.topology_io.TopologyReader(topology_file)
 print type(topology)
 domains=topology.component_list
 
