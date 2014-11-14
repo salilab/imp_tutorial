@@ -74,18 +74,21 @@ sampleobjects = []
 
 # Set up model and representation.  ***DS This should be condensed to one line or, better yet, included with an inputted topology file
 m = IMP.Model()
-simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
-bm=IMP.pmi.macros.BuildModel1(simo)
+#simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
 
 # Create list of components from topology file
-topology=IMP.pmi.topology.TopologyReader(topology_file)
-domains=topology.component_list
+topology = IMP.pmi.topology.TopologyReader(topology_file)
+domains = topology.component_list
 
-# Build model from components
-bm.build_model(component_topologies=domains,
-               list_of_rigid_bodies=rigid_bodies,
-               list_of_super_rigid_bodies=super_rigid_bodies,
-               chain_of_super_rigid_bodies=chain_of_super_rigid_bodies)
+
+bm = IMP.pmi.macros.BuildModel(m,
+                    component_topologies=domains,
+                    list_of_rigid_bodies=rigid_bodies,
+                    list_of_super_rigid_bodies=super_rigid_bodies,
+                    chain_of_super_rigid_bodies=chain_of_super_rigid_bodies)
+
+simo = bm.get_representation()
+
 
 
 # ***DS Can we internalize these commands?
