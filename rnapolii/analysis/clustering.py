@@ -3,7 +3,16 @@ import IMP.pmi
 import IMP.pmi.macros
 import sys
 
+nclusters=1
+
 is_mpi=False
+number_of_best_scoring_models=50
+merge_directories=["../modeling/"]
+prefiltervalue=2900.0
+
+#####################
+# don't change below
+#####################
 
 model=IMP.Model()
 
@@ -42,15 +51,16 @@ for name in components_names:
     rmsd_names[name]=name
 
 nclusters=1                                        # number of clusters needed by kmeans
+number_of_best_scoring_models=50
 mc.clustering("SimplifiedModel_Total_Score_None",  # don't change, field where to find the score
               "rmf_file",                          # don't change, field where to find the path for the rmf_file
               "rmf_frame_index",                   # don't change, field for the frame index
               prefiltervalue=2900.0,              # prefilter the models by score
-              number_of_best_scoring_models=50,   # number of models to be clustered
+              number_of_best_scoring_models=number_of_best_scoring_models,   # number of models to be clustered
               alignment_components=None,           # don't change, (list of proteins you want to use for structural alignment
               rmsd_calculation_components=rmsd_names, # list of proteins used to calculated the rmsd
               distance_matrix_file="distance.rawmatrix.pkl", # save the distance matrix
-              outputdir="kmeans_50_"+str(nclusters)+"/",  # directory name for the clustering
+              outputdir="kmeans_"+str(number_of_best_scoring_models)+"_"+str(nclusters)+"/",  # directory name for the clustering
               feature_keys=feature_list,                     # extract these fields from the stat file
               load_distance_matrix_file=False,                # skip the matrix calcuklation and read the precalculated matrix
               skip_clustering=False,                         # skip clustering
