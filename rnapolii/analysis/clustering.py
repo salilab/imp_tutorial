@@ -8,8 +8,7 @@ num_clusters = 1
 num_top_models = 5
 merge_directories = ["../modeling/"]
 prefiltervalue = 2900.0
-nclusters = 1
-out_dir = "kmeans_%i_%i/" %(num_top_models,nclusters)
+out_dir = "kmeans_%i_%i/" %(num_top_models,num_clusters)
 
 #################################
 # should not have to change below
@@ -54,6 +53,6 @@ mc.clustering(prefiltervalue=prefiltervalue,                   # prefilter the m
               display_plot=False,                              # display the heat map plot of the distance matrix
               exit_after_display=False,                        # exit after having displayed the distance matrix plot
               get_every=1,                                     # skip structures for faster computation
-              number_of_clusters=nclusters,                    # number of clusters to be used by kmeans algorithm
+              number_of_clusters=num_clusters,                    # number of clusters to be used by kmeans algorithm
               voxel_size=3.0,                                  # voxel size of the mrc files
               density_custom_ranges=density_names)             # setup the list of densities to be calculated
