@@ -33,8 +33,13 @@ import IMP.pmi.topology.topology_io
 
 import os
 
+######################
+##  Header
+######################
+
+
 #---------------------------
-# Set up Input Files
+# Define Input Files
 #---------------------------
 datadirectory = "../data/"
 topology_file = datadirectory+"topology.txt"
@@ -56,23 +61,15 @@ rigid_bodies = [["Rpb4"],
 super_rigid_bodies = [["Rpb4","Rpb7"]]
 chain_of_super_rigid_bodies = [["Rpb4"],
                                ["Rpb7"]]
-
-
-
-###################################
-# Here is where the work begins:
-###################################
-
-# These lists will be used by the sampling macro to determine
-# what is sampled and 
-outputobjects = []
-sampleobjects = []
+#
+################################################
+#
 
 #--------------------------------
-# Define Components and Build Model
+# Build the Model Representation
 #--------------------------------
 
-# Set up model
+# Initialize model
 m = IMP.Model()
 
 # Create list of components from topology file
@@ -89,6 +86,8 @@ bm = IMP.pmi.macros.BuildModel(m,
 representation = bm.get_representation()
 
 
+# Randomize the initial configuration before sampling
+representation.shuffle_configuration(50)
 
 bm.scale_bead_radii(40,0.8)
 
@@ -96,13 +95,14 @@ bm.scale_bead_radii(40,0.8)
 # Define Degrees of Freedom
 #----------------------------
 
-# Randomize the initial configuration before sampling
-representation.shuffle_configuration(50)
-
 # Add default mover parameters to simulation
 representation.set_rigid_bodies_max_rot(rbmaxrot)
 representation.set_floppy_bodies_max_trans(fbmaxtrans)
 representation.set_rigid_bodies_max_trans(rbmaxtrans)
+
+# These lists define what objects are sampled and what objects produce output
+outputobjects = []
+sampleobjects = []
 
 # Add the movers to the sample and output object lists
 outputobjects.append(representation)
@@ -138,7 +138,7 @@ columnmap["XLUniqueID"]=None
 
 ids_map=IMP.pmi.tools.map()
 ids_map.set_map_element(1.0,1.0)
-xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(representation,
                                    datadirectory+'polii_xlinks.csv',
                                    length=21.0,             # Cross link length in angstroms
                                    slope=0.01,              
