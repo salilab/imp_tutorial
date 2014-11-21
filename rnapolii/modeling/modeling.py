@@ -58,13 +58,13 @@ chain_of_super_rigid_bodies = [["Rpb4"],
                                ["Rpb7"]]
 
 
-# ***DS It would be super nice if the user would not need to change anything below this line
 
 ###################################
 # Here is where the work begins:
 ###################################
 
-# ***DS Can we make these lists part Representation?
+# These lists will be used by the sampling macro to determine
+# what is sampled and 
 outputobjects = []
 sampleobjects = []
 
@@ -72,9 +72,8 @@ sampleobjects = []
 # Define Components and Build Model
 #--------------------------------
 
-# Set up model and representation.  ***DS This should be condensed to one line or, better yet, included with an inputted topology file
+# Set up model
 m = IMP.Model()
-#simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
 
 # Create list of components from topology file
 topology = IMP.pmi.topology.TopologyReader(topology_file)
@@ -87,40 +86,48 @@ bm = IMP.pmi.macros.BuildModel(m,
                     list_of_super_rigid_bodies=super_rigid_bodies,
                     chain_of_super_rigid_bodies=chain_of_super_rigid_bodies)
 
-simo = bm.get_representation()
+representation = bm.get_representation()
 
 
 
-# ***DS Can we internalize these commands?
 bm.scale_bead_radii(40,0.8)
-resdensities=bm.get_density_hierarchies([t.domain_name for t in domains])
 
 #----------------------------
 # Define Degrees of Freedom
 #----------------------------
 
 # Randomize the initial configuration before sampling
-# ***DS Can we add this as a parameter to the sampling call?  Like: randomize=True, steps=50
-simo.shuffle_configuration(50)
+representation.shuffle_configuration(50)
 
 # Add default mover parameters to simulation
-simo.set_rigid_bodies_max_rot(rbmaxrot)
-simo.set_floppy_bodies_max_trans(fbmaxtrans)
-simo.set_rigid_bodies_max_trans(rbmaxtrans)
+representation.set_rigid_bodies_max_rot(rbmaxrot)
+representation.set_floppy_bodies_max_trans(fbmaxtrans)
+representation.set_rigid_bodies_max_trans(rbmaxtrans)
 
-outputobjects.append(simo)
-sampleobjects.append(simo)
+# Add the movers to the sample and output object lists
+outputobjects.append(representation)
+sampleobjects.append(representation)
 
 #--------------------------
-# Define and Import Scoring Function Components
+# Define Scoring Function Components
 #--------------------------
 
 # Excluded Volume Restraint
-ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo,resolution=10)
+ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(representation,resolution=10)
+
+# Add to the model and append to output objects
 ev.add_to_model()
 outputobjects.append(ev)
 
-# Crosslinks - dataset1
+
+#------------------
+# Crosslink Restraints
+#
+
+
+#### Import Cross-link data:
+
+# Define format of cross-link data files.
 columnmap={}
 columnmap["Protein1"]="pep1.accession"
 columnmap["Protein2"]="pep2.accession"
@@ -128,24 +135,29 @@ columnmap["Residue1"]="pep1.xlinked_aa"
 columnmap["Residue2"]="pep2.xlinked_aa"
 columnmap["IDScore"]=None
 columnmap["XLUniqueID"]=None
+
 ids_map=IMP.pmi.tools.map()
 ids_map.set_map_element(1.0,1.0)
 xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
                                    datadirectory+'polii_xlinks.csv',
-                                   length=21.0,
-                                   slope=0.01,
+                                   length=21.0,             # Cross link length in angstroms
+                                   slope=0.01,              
                                    columnmapping=columnmap,
                                    ids_map=ids_map,
-                                   resolution=1.0,
-                                   label="Trnka",
+                                   resolution=1.0,          # resolution at which restraint is evaluated (1=residue level)
+                                   label="Trnka",   
                                    csvfile=True)
-xl1.add_to_model()
-xl1.set_label("Trnka")
+
+
+xl1.add_to_model()             # crosslink must be added to the model
+xl1.set_psi_is_sampled(True)   # For bayesian modeling, we wish to sample uncertainty parameter
+psi=xl1.get_psi(1.0)[0]        # create and set range for psi
+psi.set_scale(0.05)
+
+# Since we are sampling psi, crosslink restraint must be added to sampleobjects
 sampleobjects.append(xl1)
 outputobjects.append(xl1)
-xl1.set_psi_is_sampled(True)
-psi=xl1.get_psi(1.0)[0]
-psi.set_scale(0.05)
+
 
 # crosslinks - dataset 2
 columnmap={}
@@ -169,35 +181,49 @@ xl2 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
                                    csvfile=True)
 xl2.add_to_model()
 xl2.set_label("Chen")
-sampleobjects.append(xl2)
-outputobjects.append(xl2)
 xl2.set_psi_is_sampled(True)
 psi=xl2.get_psi(1.0)[0]
 psi.set_scale(0.05)
 
+sampleobjects.append(xl2)
+outputobjects.append(xl2)
+
+
+
 # optimize a bit before adding the EM restraint
-simo.optimize_floppy_bodies(10)
+representation.optimize_floppy_bodies(10)
 
+#----------------------------
+# Electron Microscopy Restraint
+#----------------------------
 
-# EM restraint
+# get total mass of system - this can be simplified, no?
+#mass=bm.get_density_mass(...)?
+resdensities=bm.get_density_hierarchies([t.domain_name for t in domains])
 mass=sum((IMP.atom.Mass(p).get_mass() for h in resdensities for p in IMP.atom.get_leaves(h)))
+
 gemt = IMP.pmi.restraints.em.GaussianEMRestraint(resdensities,
                                                  target_gmm_file,
-                                                 target_mass_scale=mass,
-                                                 slope=0.000001,
-                                                 target_radii_scale=3.0)
+                                                 target_mass_scale=mass,   
+                                                 slope=0.000001,           # What is this slope?
+                                                 target_radii_scale=3.0)   # What is this scale?
 gemt.add_to_model()
+
+# Weight of the EM restraint. -  This is the only restraint with a weight.  Why?
 gemt.set_weight(100.0)
+
+
 outputobjects.append(gemt)
 
 #--------------------------
-# Set up Sampling Macro
+# Monte-Carlo Sampling
 #--------------------------
 
-# ***DS What values here should be "default-ier" than others...i.e. defined in the header of this script?
+# ***DS Why must the crosslink restraint be explicitly defined, but the other restraints do not?
 
+# This object defines all components to be sampled as well as the sampling protocol
 mc1=IMP.pmi.macros.ReplicaExchange0(m,
-                                    simo,
+                                    representation,
                                     monte_carlo_sample_objects=sampleobjects,
                                     output_objects=outputobjects,
                                     crosslink_restraints=[xl1,xl2],
@@ -214,4 +240,6 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     number_of_frames=num_frames,
                                     do_clean_first=True,
                                     global_output_directory="output")
+
+# Start Sampling
 mc1.execute_macro()
