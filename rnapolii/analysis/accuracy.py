@@ -19,10 +19,10 @@ model=IMP.Model()
 frames=[0]*len(rmfs)
 
 model=IMP.Model()
-pr=IMP.pmi.analysis.Precision(model,'one',selection_dictionary=selection_dictionary)
+pr=IMP.pmi.analysis.Precision(model,selection_dictionary=selection_dictionary)
 pr.set_precision_style('pairwise_rmsd')
 
-pr.add_structures(zip(rmfs,frames),"ALL",is_mpi=False)
+pr.add_structures(zip(rmfs,frames),"ALL")
 
 refrmf=''
 pr.set_reference_structure("../data/native.rmf3",0)
