@@ -6,7 +6,7 @@ IMP is a tool to generate structural models based on multiple sources of experim
 ### This tutorial explores scripts that:
 
 * Show the basic capabilities of IMP
-* Sample models of RNA Polymerase III using Electron Microscopy density and chemical crosslinks
+* Sample models of RNA Polymerase II using Electron Microscopy density and chemical crosslinks
 * Visualize these models and analyze them for accuracy and precision
 
 
