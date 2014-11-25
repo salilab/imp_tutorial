@@ -6,7 +6,7 @@ import IMP.atom
 import glob
 import itertools
 
-rmfs=glob.glob('kmeans_50_1/cluster.0/*.rmf3')[0::10]
+rmfs=glob.glob('kmeans_*_1/cluster.0/*.rmf3')[0::10]
 
 
 selection_dictionary={
