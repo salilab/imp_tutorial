@@ -32,6 +32,7 @@ import IMP.pmi.macros
 import IMP.pmi.topology.topology_io
 
 import os
+import sys
 
 ######################
 ##  Header
@@ -48,6 +49,7 @@ target_gmm_file = datadirectory+'emd_1883.map.mrc.gmm.50.txt'
 # Set MC Sampling Parameters
 #--------------------------
 num_frames = 20000
+if '--test' in sys.argv: num_frames=50
 num_mc_steps = 10
 
 #--------------------------
