@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+
+'''precision_rmsf.py
+Calculates the within- and between-cluster RMSD (=precision)
+It uses the IMP.pmi.analysis.Precision class
+Also calculates within-cluter residue mean square fluctuation (RMSF)
+'''
+
 import IMP
 import IMP.pmi
 import IMP.pmi.analysis
@@ -13,7 +21,7 @@ root_cluster_directory = 'kmeans_5_1'    # specify the directory (of clusters) t
 
 # choose components for the precision calculation
 # key is the named precision item
-# value is a list of selection tuples
+# value is a list of selection tuples [either "domain_name" or (start,stop,"domain_name") ]
 selections={"Rpb4":["Rpb4"],
             "Rpb7":["Rpb7"],
             "Rpb4_Rpb7":["Rpb4","Rpb7"]}
@@ -40,7 +48,7 @@ if test_mode:
       frame_list.append([0]*len(rmf_list[-1]))
 else:
   for d in cluster_dirs:
-      rmf_list.append(glob.glob(d+'/*.rmf3')[0::1])
+      rmf_list.append(glob.glob(d+'/*.rmf3'))
       frame_list.append([0]*len(rmf_list[-1]))
 
 # add them to the Precision object
