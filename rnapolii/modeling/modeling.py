@@ -170,7 +170,7 @@ columnmap["XLUniqueID"]=None
 ids_map=IMP.pmi.tools.map()
 ids_map.set_map_element(1.0,1.0)
 
-xl2 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+xl2 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(representation,
                                    datadirectory+'polii_juri.csv',
                                    length=21.0,
                                    slope=0.01,
