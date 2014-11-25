@@ -9,6 +9,7 @@ num_top_models = 5
 merge_directories = ["../modeling/"]
 prefiltervalue = 2900.0
 out_dir = "kmeans_%i_%i/" %(num_top_models,num_clusters)
+if '--test' in sys.argv: prefiltervalue=8000.0
 
 #################################
 # should not have to change below
