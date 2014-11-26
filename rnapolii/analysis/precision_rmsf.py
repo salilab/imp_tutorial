@@ -12,7 +12,26 @@ import IMP.pmi.analysis
 import IMP.pmi.output
 import IMP.atom
 import glob
-import itertools
+try:
+    from itertools import combinations_with_replacement
+except ImportError:
+    # Provide implementation (from Python's own itertools docs) for Python < 2.7
+    def combinations_with_replacement(iterable, r):
+        # combinations_with_replacement('ABC', 2) --> AA AB AC BB BC CC
+        pool = tuple(iterable)
+        n = len(pool)
+        if not n and r:
+            return
+        indices = [0] * r
+        yield tuple(pool[i] for i in indices)
+        while True:
+            for i in reversed(range(r)):
+                if indices[i] != n - 1:
+                    break
+            else:
+                return
+            indices[i:] = [indices[i] + 1] * (r - i)
+            yield tuple(pool[i] for i in indices)
 
 # common settings
 test_mode = False                        # runs on every 10 frames
@@ -57,7 +76,7 @@ for rmfs,frames,cdir in zip(rmf_list,frame_list,cluster_dirs):
 
 # calculate intra-cluster and inter-cluster precision
 print "calculating precision"
-for clus1,clus2 in itertools.combinations_with_replacement(range(len(rmf_list)),2):
+for clus1,clus2 in combinations_with_replacement(range(len(rmf_list)),2):
     pr.get_precision(cluster_dirs[clus1],
                      cluster_dirs[clus2],
                      root_cluster_directory+"/precision."+str(clus1)+"."+str(clus2)+".out")
