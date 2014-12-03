@@ -31,7 +31,7 @@ feature_list=["ISDCrossLinkMS_Distance_intrarb",
               "ISDCrossLinkMS_Sigma"]
 
 # Dictionary of densities to be calculated
-# the key is the name of the file and the value if the selection
+# the key is the name of the file and the value is the selection
 # example: {"med17-CTD":[(200,300,"med17")],"med17-CTD.med14":[(200,300,"med17"),"med14"]   }
 density_names = {"Rpb4":("Rpb4"),
                "Rpb7":("Rpb7")}
@@ -50,10 +50,10 @@ mc.clustering(prefiltervalue=prefiltervalue,                   # prefilter the m
               distance_matrix_file="distance.rawmatrix.pkl",   # save the distance matrix
               outputdir=out_dir,                               # location for clustering results
               feature_keys=feature_list,                       # extract these fields from the stat file
-              load_distance_matrix_file=False,                 # skip the matrix calcuklation and read the precalculated matrix
+              load_distance_matrix_file=False,                 # skip the matrix calculation and read the precalculated matrix
               display_plot=True,                               # display the heat map plot of the distance matrix
               exit_after_display=False,                        # exit after having displayed the distance matrix plot
               get_every=1,                                     # skip structures for faster computation
-              number_of_clusters=num_clusters,                    # number of clusters to be used by kmeans algorithm
+              number_of_clusters=num_clusters,                 # number of clusters to be used by kmeans algorithm
               voxel_size=3.0,                                  # voxel size of the mrc files
               density_custom_ranges=density_names)             # setup the list of densities to be calculated
