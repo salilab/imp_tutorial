@@ -20,6 +20,7 @@ class Tests(unittest.TestCase):
         # Run clustering
         os.chdir(os.path.join(TOPDIR, 'analysis'))
         p = subprocess.check_call(["python", 'clustering.py', "--test"])
+        self.assertTrue(os.path.exists('kmeans_5_1/dist_matrix.pdf'))
         self.assertTrue(os.path.exists('kmeans_5_1/cluster.0/0.rmf3'))
 
         # Test analysis
