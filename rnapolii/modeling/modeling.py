@@ -93,8 +93,6 @@ representation = bm.get_representation()
 # Randomize the initial configuration before sampling
 representation.shuffle_configuration(50)
 
-bm.scale_bead_radii(40,0.8)
-
 #--------------------------
 # Define Degrees of Freedom
 #--------------------------
@@ -137,26 +135,17 @@ columnmap["Protein2"]="pep2.accession"
 columnmap["Residue1"]="pep1.xlinked_aa"
 columnmap["Residue2"]="pep2.xlinked_aa"
 columnmap["IDScore"]=None
-columnmap["XLUniqueID"]=None
 
-# isd_map is a dictionary/map that is used to determine the psi
-# parameter from identity scores (such as ID-Score, or FDR)
-ids_map=IMP.pmi.tools.map()
-ids_map.set_map_element(1.0,1.0)
 xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(representation,
                                    datadirectory+'polii_xlinks.csv',
                                    length=21.0,
                                    slope=0.01,
                                    columnmapping=columnmap,
-                                   ids_map=ids_map,
                                    resolution=1.0,
                                    label="Trnka",
                                    csvfile=True)
 
 xl1.add_to_model()             # crosslink must be added to the model
-xl1.set_psi_is_sampled(True)   # For bayesian modeling, we wish to sample uncertainty parameter
-psi=xl1.get_psi(1.0)[0]        # create and set range for psi
-psi.set_scale(0.05)
 
 sampleobjects.append(xl1) #crosslink restraint is storing a sampled particle
 outputobjects.append(xl1)
@@ -171,24 +160,17 @@ columnmap["Protein2"]="prot2"
 columnmap["Residue1"]="res1"
 columnmap["Residue2"]="res2"
 columnmap["IDScore"]=None
-columnmap["XLUniqueID"]=None
-ids_map=IMP.pmi.tools.map()
-ids_map.set_map_element(1.0,1.0)
 
 xl2 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(representation,
                                    datadirectory+'polii_juri.csv',
                                    length=21.0,
                                    slope=0.01,
                                    columnmapping=columnmap,
-                                   ids_map=ids_map,
                                    resolution=1.0,
                                    label="Chen",
                                    csvfile=True)
 xl2.add_to_model()
-xl2.set_label("Chen")
-xl2.set_psi_is_sampled(True)
-psi=xl2.get_psi(1.0)[0]
-psi.set_scale(0.05)
+
 sampleobjects.append(xl2)
 outputobjects.append(xl2)
 
