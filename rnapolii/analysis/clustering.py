@@ -33,8 +33,8 @@ feature_list=["ISDCrossLinkMS_Distance_intrarb",
 # Dictionary of densities to be calculated
 # the key is the name of the file and the value is the selection
 # example: {"med17-CTD":[(200,300,"med17")],"med17-CTD.med14":[(200,300,"med17"),"med14"]   }
-density_names = {"Rpb4":("Rpb4"),
-               "Rpb7":("Rpb7")}
+density_names = {"Rpb4":["Rpb4"],
+               "Rpb7":["Rpb7"]}
 
 # list of component names needed to calculate the RMSD for the clustering
 rmsd_names = {"Rpb4":"Rpb4",
