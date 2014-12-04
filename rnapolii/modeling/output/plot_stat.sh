@@ -12,7 +12,7 @@
 # -s | suppress showing plot
 # -g | save gnuplot file
 # -b | BEGIN from this frame (in case you want to skip an equilibration phase)
-# -o | saves plot to OUTPUTFILE. default is no output
+# -o | saves plot as png. default is no output
 # -h | prints help text to screen
 #
 #
@@ -47,14 +47,16 @@ helptext=" # \n
 # \n
 # usage: \n
 # \n
-# ./plot_stat.sh -i STATFILE -x XCOLUMN -y YCOLUMN [-m POINTS] [-plot] [-o OUTPUTFILE] \n
+# ./plot_stat.sh -i STATFILE -y ycolumn [-x xcolumn] [-m POINTS] \n
 # \n
 # -i | input stat file name \n
-# -x | column number with Y data values OR column header string \n
 # -y | column number with Y data values OR column header string \n
+# -x | column number with X data values OR column header string \n
 # -m | method of plotting.  POINTS, LINES or LINESPOINTS \n
 # -s | suppress showing plot \n
-# -o | saves plot to OUTPUTFILE default is no output \n
+# -o | saves plot to png file with column header names \n
+# -b | begin at this frame number \n
+# -g | saves gnuplot file \n
 # -h | prints this help text to screen \n
 #\n
 #\n"
@@ -64,13 +66,15 @@ method="points"
 output=false
 x_input=false
 show_plot=true
+save_gnuplot_file=false
+save_plot=false
 x_col=0
 y_col=0
 begin=1
 
 
 # Parse options
-while getopts ":hsgi:x:y:m:b:" flag; do
+while getopts ":hsgi:x:y:m:b:o" flag; do
     case $flag in
        h)  echo -e $helptext; exit;;
        i)  stat_file=$OPTARG;;
@@ -80,7 +84,7 @@ while getopts ":hsgi:x:y:m:b:" flag; do
        b)  begin=$OPTARG;;
        s)  show_plot=false;;
        g)  save_gnuplot_file=true;;
-       o)  save_plot=true; outputfile=$OPTARG;;
+       o)  save_plot=true;;
        *)  echo "Invalid Option ";;
     esac
 done
@@ -119,24 +123,36 @@ paste <(echo "$x_vals") <(echo "$y_vals") --delimiters " " > temp_stat.dat
 # Create gnuplot file
 
 gnuplot_file="test.gnuplot"
-outfile=$x_field-$y_field.eps
+
+
 if $show_plot; then
  echo "set terminal wxt" > $gnuplot_file
-else
- echo "set terminal postscript enhanced" > $gnuplot_file
+ echo "unset key" >> $gnuplot_file
+ echo "set xlabel \"$x_field\"" >> $gnuplot_file
+ echo "set ylabel \"$y_field\"" >> $gnuplot_file
+ echo "plot \"temp_stat.dat\" every ::$begin::$n_lines u 1:2 w $method">> $gnuplot_file
+ gnuplot --persist $gnuplot_file
+fi
+
+if $save_plot; then
+ outfile=$x_field-$y_field.png
+ echo "set terminal png" > $gnuplot_file
  echo "set output \"$outfile\"" >> $gnuplot_file
  echo "plot saved to " $outfile
+ echo "unset key" >> $gnuplot_file
+ echo "set xlabel \"$x_field\"" >> $gnuplot_file
+ echo "set ylabel \"$y_field\"" >> $gnuplot_file
+ echo "plot \"temp_stat.dat\" every ::$begin::$n_lines u 1:2 w $method">> $gnuplot_file
+ gnuplot $gnuplot_file
 fi
-echo "unset key" >> $gnuplot_file
-echo "set xlabel \"$x_field\"" >> $gnuplot_file
-echo "set ylabel \"$y_field\"" >> $gnuplot_file
-echo "plot \"temp_stat.dat\" every ::$begin::$n_lines u 1:2 w $method">> $gnuplot_file
 
-gnuplot --persist $gnuplot_file
 
-#rm temp_stat.dat
-#rm $gnuplot_file
-
+if $save_gnuplot_file; then
+ echo "Gnuplot file (test.gnuplot) and temp statfile (temp_stat.dat) saved"
+else
+ rm temp_stat.dat
+ rm $gnuplot_file
+fi
 
 
 
