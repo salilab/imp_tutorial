@@ -54,11 +54,11 @@ num_mc_steps = 10
 #--------------------------
 
 # rigid body movement params
-rb_max_trans = 2.00
+rb_max_trans = 4.00
 rb_max_rot = 0.04
 
 # flexible bead movement
-bead_max_trans = 3.00
+bead_max_trans = 4.00
 
 # each list contains list of domain names (from topology) that move together
 #  flexible beads are automatically added to missing regions and sampled
@@ -191,7 +191,7 @@ gemt = IMP.pmi.restraints.em.GaussianEMRestraint(em_components,
                                                  target_gmm_file,
                                                  scale_target_to_mass=True,
                                                  slope=0.000001,
-                                                 weight=100.0)
+                                                 weight=80.0)
 gemt.add_to_model()
 outputobjects.append(gemt)
 
@@ -212,7 +212,7 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     simulated_annealing_maximum_temperature_nframes=20,
                                     replica_exchange_minimum_temperature=1.0,
                                     replica_exchange_maximum_temperature=2.5,
-                                    number_of_best_scoring_models=100,
+                                    number_of_best_scoring_models=10,
                                     monte_carlo_steps=num_mc_steps,
                                     number_of_frames=num_frames,
                                     global_output_directory="output")

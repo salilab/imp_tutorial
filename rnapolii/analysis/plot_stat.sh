@@ -121,7 +121,7 @@ paste <(echo "$x_vals") <(echo "$y_vals") --delimiters " " > temp_stat.dat
 gnuplot_file="test.gnuplot"
 outfile=$x_field-$y_field.eps
 if $show_plot; then
- echo "set terminal wxt" > $gnuplot_file
+ echo "set terminal dumb" > $gnuplot_file
 else
  echo "set terminal postscript enhanced" > $gnuplot_file
  echo "set output \"$outfile\"" >> $gnuplot_file
