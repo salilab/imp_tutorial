@@ -97,7 +97,11 @@ for nc,component in enumerate(domains):
     ps = sel.get_selected_particles()
     clr = IMP.display.get_rgb_color(float(nc)/len(domains))
     for p in ps:
-        IMP.display.Colored(p).set_color(clr)
+        if not IMP.display.Colored.get_is_setup(p):
+            IMP.display.Colored.setup_particle(p,clr)
+        else:
+            IMP.display.Colored(p).set_color(clr)
+
 
 # Randomize the initial configuration before sampling
 representation.shuffle_configuration(50)
