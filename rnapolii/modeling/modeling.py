@@ -90,6 +90,15 @@ bm = IMP.pmi.macros.BuildModel(m,
                     chain_of_super_rigid_bodies=chain_of_super_rigid_bodies)
 representation = bm.get_representation()
 
+# add colors to the components
+for nc,component in enumerate(domains):
+    name = component.name
+    sel = IMP.atom.Selection(representation.prot,molecule=name)
+    ps = sel.get_selected_particles()
+    clr = IMP.display.get_rgb_color(float(nc)/len(domains))
+    for p in ps:
+        IMP.display.Colored(p).set_color(clr)
+
 # Randomize the initial configuration before sampling
 representation.shuffle_configuration(50)
 
