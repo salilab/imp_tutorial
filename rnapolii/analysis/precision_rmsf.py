@@ -70,6 +70,8 @@ else:
       rmf_list.append(glob.glob(d+'/*.rmf3'))
       frame_list.append([0]*len(rmf_list[-1]))
 
+print frame_list
+
 # add them to the Precision object
 for rmfs,frames,cdir in zip(rmf_list,frame_list,cluster_dirs):
     pr.add_structures(zip(rmfs,frames),cdir)
@@ -81,7 +83,7 @@ for clus1,clus2 in combinations_with_replacement(range(len(rmf_list)),2):
                      cluster_dirs[clus2],
                      root_cluster_directory+"/precision."+str(clus1)+"."+str(clus2)+".out")
 
-# compute resiude mean-square fluctuation (RMSF)
+# compute residue mean-square fluctuation (RMSF)
 print "calculating RMSF"
 for d in cluster_dirs:
     pr.get_rmsf(structure_set_name=d,outdir=d)
