@@ -12,6 +12,7 @@ import IMP.pmi.analysis
 import IMP.pmi.output
 import IMP.atom
 import glob
+from copy import deepcopy
 try:
     from itertools import combinations_with_replacement
 except ImportError:
@@ -34,8 +35,8 @@ except ImportError:
             yield tuple(pool[i] for i in indices)
 
 # common settings
-test_mode = False                        # runs on every 10 frames
-root_cluster_directory = 'kmeans_5_1'    # specify the directory (of clusters) to be analysed
+test_mode = False                           # runs on every 20 frames
+root_cluster_directory = 'kmeans_100_2'     # specify the directory (of clusters) to be analysed
 
 
 # choose components for the precision calculation
@@ -51,10 +52,10 @@ selections={"Rpb4":["Rpb4"],
 ##############################
 
 # setup Precision calculator
+orig_selections=deepcopy(selections)
 model = IMP.Model()
 pr = IMP.pmi.analysis.Precision(model,resolution=1,selection_dictionary=selections)
 pr.set_precision_style('pairwise_rmsd')
-
 
 # gather the RMF filenames for each cluster
 rmf_list=[]
@@ -63,7 +64,7 @@ cluster_dirs=glob.glob(root_cluster_directory+'/cluster.*/')
 if test_mode:
   # runs on the first 10 structures to test if it runs smoothly
   for d in cluster_dirs:
-      rmf_list.append(glob.glob(d+'/*.rmf3')[0::10])
+      rmf_list.append(glob.glob(d+'/*.rmf3')[0::20])
       frame_list.append([0]*len(rmf_list[-1]))
 else:
   for d in cluster_dirs:
@@ -76,6 +77,7 @@ print frame_list
 for rmfs,frames,cdir in zip(rmf_list,frame_list,cluster_dirs):
     pr.add_structures(zip(rmfs,frames),cdir)
 
+
 # calculate intra-cluster and inter-cluster precision
 print "calculating precision"
 for clus1,clus2 in combinations_with_replacement(range(len(rmf_list)),2):
@@ -87,5 +89,5 @@ for clus1,clus2 in combinations_with_replacement(range(len(rmf_list)),2):
 print "calculating RMSF"
 for d in cluster_dirs:
     pr.get_rmsf(structure_set_name=d,outdir=d)
-
+    pr.selection_dictionary = deepcopy(orig_selections)
 print "done"
