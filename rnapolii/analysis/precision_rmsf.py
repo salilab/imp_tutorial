@@ -36,7 +36,7 @@ except ImportError:
 
 # common settings
 test_mode = False                           # runs on every 20 frames
-root_cluster_directory = 'kmeans_100_2'     # specify the directory (of clusters) to be analysed
+root_cluster_directory = 'kmeans_5_1'       # specify the directory (of clusters) to be analysed
 
 
 # choose components for the precision calculation
