@@ -34,7 +34,6 @@ selections = {"Rpb4":["Rpb4"],
 # setup Precision calculator
 model=IMP.Model()
 frames=[0]*len(rmfs)
-model=IMP.Model()
 pr=IMP.pmi.analysis.Precision(model,selection_dictionary=selections)
 pr.set_precision_style('pairwise_rmsd')
 pr.add_structures(zip(rmfs,frames),"ALL")
