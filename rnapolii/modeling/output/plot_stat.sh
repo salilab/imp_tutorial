@@ -138,6 +138,7 @@ if $show_plot; then
  echo "set xlabel \"$x_field\"" >> $gnuplot_file
  echo "set ylabel \"$y_field\"" >> $gnuplot_file
  echo "plot \"temp_stat.dat\" every ::$begin::$n_lines u 1:2 w $method">> $gnuplot_file
+ echo "pause mouse close" >> $gnuplot_file
  gnuplot --persist $gnuplot_file
 fi
 
@@ -162,4 +163,4 @@ else
 fi
 
 
-
+echo $show_plot
