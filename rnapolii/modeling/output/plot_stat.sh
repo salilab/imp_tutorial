@@ -118,7 +118,14 @@ y_field=`echo $results | awk '{print $2}' | tr "'" ' '| sed 's/ //g'`
 y_vals=`awk -v y=$y_col -F"," '{print $y}' $stat_file | awk '{print $NF}' | sed "s/'//g" | tail -n+2`
 echo "y values from column" $y_col":  " $y_field
 
-paste -d " " <(echo "$x_vals") <(echo "$y_vals") > temp_stat.dat
+
+
+#paste -d " " <(echo "$x_vals") <(echo "$y_vals") > temp_stat.dat
+echo "$x_vals" > t1 
+echo "$y_vals" > t2
+paste -d " " t1 t2 > temp_stat.dat
+rm t1 t2
+
 
 # Create gnuplot file
 
