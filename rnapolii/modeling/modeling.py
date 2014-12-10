@@ -132,8 +132,9 @@ sampleobjects.append(representation)
 
 
 # Excluded Volume Restraint
-#  To speed up this expensive restraint, we operate it at resolution 10
-ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(representation,resolution=10)
+#  To speed up this expensive restraint, we operate it at resolution 20
+ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(
+                                         representation, resolution=20)
 ev.add_to_model()
 outputobjects.append(ev)
 
