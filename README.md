@@ -1,7 +1,7 @@
 ## Integrative Modeling Platform (IMP) Tutorial
 ----------------------------------
 
-IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://www.integrativemodeling.org/2.3.1/doc/tutorial/)
+IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://www.integrativemodeling.org/nightly/doc/tutorial/)
 
 ### This tutorial explores scripts that:
 
@@ -11,4 +11,4 @@ IMP is a tool to generate structural models based on multiple sources of experim
 
 
 ### Running the Tutorial
-All instructions for the tutorial are contined in the [tutorial wiki](https://github.com/salilab/imp_tutorial/wiki)
+Follow the instructions [in the IMP docs](http://integrativemodeling.org/nightly/doc/tutorial/rnapolii_stalk.html)
