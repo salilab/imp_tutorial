@@ -29,7 +29,7 @@ import IMP.pmi.tools
 import IMP.pmi.samplers
 import IMP.pmi.output
 import IMP.pmi.macros
-import IMP.pmi.topology.topology_io
+import IMP.pmi.topology
 
 import os
 import sys
