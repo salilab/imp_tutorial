@@ -1,3 +1,6 @@
+import matplotlib as mpl
+mpl.use('Agg')
+
 import IMP
 import IMP.pmi
 import IMP.pmi.macros
