@@ -9,6 +9,7 @@ IMP is a tool to generate structural models based on multiple sources of experim
 * Sample models of RNA Polymerase II using Electron Microscopy density and chemical crosslinks
 * Visualize these models and analyze them for accuracy and precision
 
+_Last known good IMP version_: [![build info](https://salilab.org/imp/systems/?sysstat=7)](http://salilab.org/imp/systems/)
 
 ### Running the Tutorial
 Follow the instructions [in the IMP docs](http://integrativemodeling.org/nightly/doc/tutorial/rnapolii_stalk.html)
