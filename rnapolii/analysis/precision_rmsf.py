@@ -6,6 +6,7 @@ It uses the IMP.pmi.analysis.Precision class
 Also calculates within-cluter residue mean square fluctuation (RMSF)
 '''
 
+from __future__ import print_function
 import IMP
 import IMP.pmi
 import IMP.pmi.analysis
@@ -71,7 +72,7 @@ else:
       rmf_list.append(glob.glob(d+'/*.rmf3'))
       frame_list.append([0]*len(rmf_list[-1]))
 
-print frame_list
+print(frame_list)
 
 # add them to the Precision object
 for rmfs,frames,cdir in zip(rmf_list,frame_list,cluster_dirs):
@@ -79,15 +80,15 @@ for rmfs,frames,cdir in zip(rmf_list,frame_list,cluster_dirs):
 
 
 # calculate intra-cluster and inter-cluster precision
-print "calculating precision"
+print("calculating precision")
 for clus1,clus2 in combinations_with_replacement(range(len(rmf_list)),2):
     pr.get_precision(cluster_dirs[clus1],
                      cluster_dirs[clus2],
                      root_cluster_directory+"/precision."+str(clus1)+"."+str(clus2)+".out")
 
 # compute residue mean-square fluctuation (RMSF)
-print "calculating RMSF"
+print("calculating RMSF")
 for d in cluster_dirs:
     pr.get_rmsf(structure_set_name=d,outdir=d)
     pr.selection_dictionary = deepcopy(orig_selections)
-print "done"
+print("done")

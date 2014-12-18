@@ -6,6 +6,7 @@ It uses the IMP.pmi.analysis.Precision class
 Requires a native structure for comparison
 '''
 
+from __future__ import print_function
 import IMP
 import IMP.pmi
 import IMP.pmi.analysis
@@ -40,4 +41,4 @@ pr.add_structures(zip(rmfs,frames),"ALL")
 
 # calculate average distance to the reference file
 pr.set_reference_structure(reference_rmf,0)
-print pr.get_average_distance_wrt_reference_structure("ALL")
+print(pr.get_average_distance_wrt_reference_structure("ALL"))
