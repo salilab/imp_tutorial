@@ -1,6 +1,3 @@
-## Integrative Modeling Platform (IMP) Tutorial
-----------------------------------
-
 IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://www.integrativemodeling.org/nightly/doc/tutorial/)
 
 ### This tutorial explores scripts that:
