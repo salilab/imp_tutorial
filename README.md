@@ -1,4 +1,4 @@
-IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://www.integrativemodeling.org/nightly/doc/tutorial/)
+IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://integrativemodeling.org/nightly/doc/manual/)
 
 ### This tutorial explores scripts that:
 
@@ -9,4 +9,4 @@ IMP is a tool to generate structural models based on multiple sources of experim
 _Last known good IMP version_: [![build info](https://salilab.org/imp/systems/?sysstat=7)](http://salilab.org/imp/systems/)
 
 ### Running the Tutorial
-Follow the instructions [in the IMP docs](http://integrativemodeling.org/nightly/doc/tutorial/rnapolii_stalk.html)
+Follow the instructions [in the IMP docs](http://integrativemodeling.org/nightly/doc/manual/rnapolii_stalk.html)
