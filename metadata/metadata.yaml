@@ -1,6 +1,6 @@
 title: IMP Tutorial
 tags: [chemical crosslinks, EM density map, X-ray, PMI]
-prereqs: [python/scikit, python/matplotlib, python/biopython]
+prereqs: [python/scikit, python/matplotlib]
 test:
     runtime: 3h
     build: release
