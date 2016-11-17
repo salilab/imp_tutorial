@@ -2,7 +2,6 @@
 #############################################
 ##  IMP Tutorial Script
 ##
-##  Riccardo's awesome seminar: Dec 8, 2014
 #############################################
 #
 # Short modeling script combining EM and Crosslinking data
@@ -195,10 +194,10 @@ representation.optimize_floppy_bodies(10)
 # Electron Microscopy Restraint
 #  The GaussianEMRestraint uses a density overlap function to compare model to data
 #   First the EM map is approximated with a Gaussian Mixture Model (done separately)
-#   Second, the componets of the model are represented with Gaussians (forming the model GMM)
+#   Second, the components of the model are represented with Gaussians (forming the model GMM)
 #   Other options: scale_to_target_mass ensures the total mass of model and map are identical
 #                  slope: nudge model closer to map when far away
-#                  weight: experimental, needed becaues the EM restraint is quasi-bayesian
+#                  weight: experimental, needed becaues the EM restraint is quasi-Bayesian
 em_components = bm.get_density_hierarchies([t.domain_name for t in domains])
 gemt = IMP.pmi.restraints.em.GaussianEMRestraint(em_components,
                                                  target_gmm_file,
