@@ -18,7 +18,7 @@ import itertools
 # common settings
 reference_rmf = "../data/native.rmf3"
 test_mode = False                             # run on every 10 rmf files
-rmfs = glob.glob('kmeans_*_1/cluster.0/*.rmf3') # list of the RMFS to calculate on
+rmfs = glob.glob('kmeans_*_*/cluster.0/*.rmf3') # list of the RMFS to calculate on
 
 # choose components for the precision calculation
 # key is the named precision item
