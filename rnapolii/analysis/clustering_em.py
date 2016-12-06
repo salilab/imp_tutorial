@@ -7,8 +7,8 @@ import IMP.pmi.macros
 import sys,os
 
 # most common settings
-num_clusters = 2
-num_top_models = 50
+num_clusters = 1
+num_top_models = 5
 merge_directories = ["../modeling_em/"]
 prefiltervalue = 2900.0
 out_dir = "kmeans_%i_%i/" %(num_top_models,num_clusters)
