@@ -34,7 +34,7 @@ import sys
 # Define Input/Output Files
 #---------------------------
 datadirectory = "../data/"
-topology_file = datadirectory+"topology_pmi2.txt" 
+topology_file = datadirectory+"topology.txt" 
 target_gmm_file = datadirectory+'emd_1883.map.mrc.gmm.50.txt' # The EM map data
 output_directory = "./output"
 
@@ -45,28 +45,7 @@ num_frames = 1000
 if '--test' in sys.argv: num_frames=50
 num_mc_steps = 10
 
-#--------------------------
-# Mover Parameters
-#--------------------------
 
-# rigid body movement params. 
-# These should be optimized according to MC acceptance ratios.
-rb_max_trans = 4.0
-rb_max_rot = 0.04
-srb_max_trans = 2.0
-
-# flexible bead movement
-bead_max_trans = 4.0
-
-# each list contains list of domain names (from topology) that move together
-#  flexible beads are automatically added to missing regions and sampled
-#  These are defined in the topology file.
-rigid_bodies = [["Rpb4"],
-                ["Rpb7"]]
-#super_rigid_bodies = [["Rpb4","Rpb7"]]
-#chain_of_super_rigid_bodies = [["Rpb4"],
-#                               ["Rpb7"]]
-#
 ################################################
 #
 
@@ -100,22 +79,26 @@ bs.add_state(topology)
 
 # Once all of your states are added, execute the macro.
 # This will return the root hierarchy (root_hier) and the dof object, both of which are used later on.
-root_hier, dof = bs.execute_macro(max_rb_trans=rb_max_trans, 
-                                  max_rb_rot=rb_max_rot, 
-                                  max_bead_trans=bead_max_trans, 
-                                  max_srb_trans=srb_max_trans)
+# At the same time, here we can set the rigid body parameters, which should be
+# optimized according to MC acceptance ratios. There are three kind of movers:
+# Rigid Body, Bead, and Super Rigid Body. max_rb_trans and max_rb_rot are the 
+# maximum translation and rotation of the Rigid Body mover, max_srb_trans and 
+# max_srb_rot are the maximum translation and rotation of the Super Rigid Body mover
+# and max_bead_trans is the maximum translation of the Bead Mover.
+
+root_hier, dof = bs.execute_macro(max_rb_trans=4.0, 
+                                  max_rb_rot=0.3, 
+                                  max_bead_trans=4.0, 
+                                  max_srb_trans=4.0,
+                                  max_srb_rot=0.3)
 sys = bs.system
 
 # This nomenclature to get a list of all the molecule objects is bad...make this simpler.
-all_molecules = list(bs.get_molecules()[0].values())
-
-shuffled_molecules=[]
-for mol in rigid_bodies:
-    shuffled_molecules.append(bs.get_molecule(mol[0]))
+all_molecules = IMP.atom.get_by_type(root_hier, IMP.atom.MOLECULE_TYPE)
 
 
 
-
+"""
 # Shuffle the configuration of only the molecules we are interested in (Rpb4 and Rpb7)
 IMP.pmi.tools.shuffle_configuration(shuffled_molecules, 
                                     max_translation=50, 
@@ -124,7 +107,7 @@ IMP.pmi.tools.shuffle_configuration(shuffled_molecules,
                                     hierarchies_included_in_collision=list(bs.get_molecules()[0].values()),
                                     niterations=100)
 
-
+"""
 
 #-----------------------------------
 # SCORING FUNCTION / RESTRAINTS
@@ -140,18 +123,12 @@ outputobjects = [] # reporter objects...output is included in the stat file
 
 #-------
 # Excluded Volume Restraint
-#  Since much of our system is fixed, we initialize a bipartite restraint
-#  that is only evaluated between included_objects and other_objects. 
 #
 ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(
-                                         included_objects=shuffled_molecules, 
-                                         other_objects=all_molecules,
+                                         included_objects=root_hier,
                                          resolution=10)
-# To apply this restraint to all molecules:
-#ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(included_objects=all_molecules, resolution=10)
 ev.add_to_model()         # add to scoring function
 outputobjects.append(ev)  # add to output
-
 
 #-------
 # Crosslinks - dataset 1
