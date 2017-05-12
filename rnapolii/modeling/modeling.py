@@ -93,21 +93,24 @@ root_hier, dof = bs.execute_macro(max_rb_trans=4.0,
                                   max_srb_rot=0.3)
 sys = bs.system
 
-# This nomenclature to get a list of all the molecule objects is bad...make this simpler.
-all_molecules = IMP.atom.get_by_type(root_hier, IMP.atom.MOLECULE_TYPE)
+# Fix all rigid bodies but not Rpb4 and Rpb7 (the stalk)
+# First select and gather all particles to fix.
+fixed_particles=[]
+for prot in ["Rpb1","Rpb2","Rpb3","Rpb5","Rpb6","Rpb8","Rpb9","Rpb10","Rpb11","Rpb12"]:
+    fixed_particles+=IMP.atom.Selection(root_hier,molecule=prot).get_selected_particles()
+# Fix the Corresponding Rigid movers using dof
+# The flexible beads will still be flexible (fixed_beads is empty)!
+fixed_beads,fixed_rbs=dof.disable_movers(fixed_particles,[IMP.core.RigidBodyMover,IMP.pmi.TransformMover])
 
-
-
-"""
-# Shuffle the configuration of only the molecules we are interested in (Rpb4 and Rpb7)
-IMP.pmi.tools.shuffle_configuration(shuffled_molecules, 
+# Shuffle the rigid body configuration of only the molecules we are interested in (Rpb4 and Rpb7)
+# but all flexible beads will also be shuffled.
+IMP.pmi.tools.shuffle_configuration(root_hier,
+                                    excluded_rigid_bodies=fixed_rbs,
                                     max_translation=50, 
                                     verbose=True,
                                     cutoff=5.0,
-                                    hierarchies_included_in_collision=list(bs.get_molecules()[0].values()),
                                     niterations=100)
 
-"""
 
 #-----------------------------------
 # SCORING FUNCTION / RESTRAINTS
@@ -119,6 +122,16 @@ IMP.pmi.tools.shuffle_configuration(shuffled_molecules,
 #  Appending the restraints to the outputobjects list reports them in the stat file.
 #-----------------------------------
 outputobjects = [] # reporter objects...output is included in the stat file
+
+# Connectivity keeps things connected along the backbone (ignores if inside same rigid body)
+mols = IMP.pmi.tools.get_molecules(root_hier)
+for mol in mols:
+    molname=mol.get_name()        
+    IMP.pmi.tools.display_bonds(mol)
+    cr = IMP.pmi.restraints.stereochemistry.ConnectivityRestraint(mol,scale=2.0)
+    cr.add_to_model()
+    cr.set_label(molname)
+    outputobjects.append(cr)
 
 
 #-------
