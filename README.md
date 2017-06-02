@@ -1,4 +1,4 @@
-IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://integrativemodeling.org/nightly/doc/manual/)
+IMP is a tool to generate structural models based on multiple sources of experimental data.  A detailed explanation of IMP and integrative modeling is given [here](http://integrativemodeling.org/nightly/doc/manual/). An ipython [example](http://nbviewer.jupyter.org/github/salilab/imp_tutorial/blob/develop/doc/IMP_example.ipynb?flush_cache=true) of IMP usage is also provided in this repository.
 
 ### This tutorial explores scripts that:
 
