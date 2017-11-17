@@ -1,0 +1,18 @@
+# This is a template configuration file for Travis CI, for testing
+# your tutorial regularly. Copy it to .travis.yml in the top level
+# directory of your tutorial, in the master branch.
+
+sudo: false
+language: python
+python:
+  - 2.7
+  - 3.6
+env:
+  - IMP_BRANCH=develop
+  - IMP_BRANCH=master
+install:
+  - support/tutorial_tools/setup_travis.sh $HOME/conda $IMP_BRANCH $TRAVIS_PYTHON_VERSION
+  - source $HOME/conda/bin/activate python$TRAVIS_PYTHON_VERSION
+  - python -V
+script:
+  - nosetests --exe support/test
