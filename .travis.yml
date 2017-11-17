@@ -14,5 +14,6 @@ install:
   - support/tutorial_tools/setup_travis.sh $HOME/conda $IMP_BRANCH $TRAVIS_PYTHON_VERSION
   - source $HOME/conda/bin/activate python$TRAVIS_PYTHON_VERSION
   - python -V
+  - conda install --yes -q scikit-learn
 script:
   - nosetests --exe support/test
