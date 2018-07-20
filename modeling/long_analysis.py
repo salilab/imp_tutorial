@@ -119,8 +119,8 @@ density_names={"REST":["Rpb1","Rpb2","Rpb3","Rpb5","Rpb6","Rpb8","Rpb9","Rpb10",
      "Rpb7":["Rpb7"],
      "Rpb1-200-300":[(200,300,"Rpb1")]}
 
-are.save_densities(cluster=best_cluster,density_custom_ranges=density_names,prefix="5")
-are.save_densities(cluster=are[0],density_custom_ranges=density_names,prefix="0")
+are.save_densities(cluster=best_cluster,density_custom_ranges=density_names,prefix="BestCluster")
+are.save_densities(cluster=are[0],density_custom_ranges=density_names,prefix="Cluster-0")
 
 
 # We can compute the global contact map of the whole complex.
