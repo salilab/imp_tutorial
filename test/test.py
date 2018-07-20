@@ -6,7 +6,7 @@ import sys
 import subprocess
 
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..',
-                                      'rnapolii'))
+                                      '.'))
 
 class Tests(unittest.TestCase):
 
@@ -14,20 +14,14 @@ class Tests(unittest.TestCase):
         """Test modeling and analysis"""
         # Run modeling
         os.chdir(os.path.join(TOPDIR, 'modeling'))
-        p = subprocess.check_call(["python", 'modeling.py', "--test"])
+        p = subprocess.check_call(["python", 'modeling.py'])
         self.assertTrue(os.path.exists('output/rmfs/0.rmf3'))
 
-        # Run clustering
-        os.chdir(os.path.join(TOPDIR, 'analysis'))
-        p = subprocess.check_call(["python", 'clustering.py', "--test"])
-        self.assertTrue(os.path.exists('kmeans_5_1/dist_matrix.pdf'))
-        self.assertTrue(os.path.exists('kmeans_5_1/cluster.0/0.rmf3'))
+        # Run short analysis
+        p = subprocess.check_call(["python", 'short_analysis.py'])
 
-        # Test analysis
-        p = subprocess.check_call(["python", 'precision_rmsf.py'])
-        self.assertTrue(os.path.exists('kmeans_5_1/precision.0.0.out'))
-
-        p = subprocess.check_call(["python", 'accuracy.py'])
+        # Test long analysis
+        p = subprocess.check_call(["python", 'long_analysis.py'])
 
 if __name__ == '__main__':
     unittest.main()
