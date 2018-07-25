@@ -14,6 +14,8 @@ class Tests(unittest.TestCase):
         """Test modeling and analysis"""
         # Run modeling
         os.chdir(os.path.join(TOPDIR, 'modeling'))
+        p = subprocess.check_call(["python", 'IMP_example.py'])
+
         p = subprocess.check_call(["python", 'modeling.py'])
         self.assertTrue(os.path.exists('output/rmfs/0.rmf3'))
 
