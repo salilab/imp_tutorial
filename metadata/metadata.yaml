@@ -1,5 +1,10 @@
-title: IMP Tutorial
+title: PMI RNAPII Modeling Tutorial
 tags: [chemical crosslinks, EM density map, X-ray, PMI]
+description: >
+    This tutorial introduces the Python Modeling Interface (PMI), a set
+    of tools designed to handle all steps of the modeling protocol, and
+    demonstrates it by modeling the stalk of RNA Polymerase II using
+    cross-linking, electron microscopy, and x-ray crystallography data.
 prereqs: [python/scikit, python/matplotlib]
 test:
     runtime: 3h
