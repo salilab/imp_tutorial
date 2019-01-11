@@ -40,85 +40,51 @@ datadirectory = "../data/"
 topology_file = datadirectory+"topology.txt"
 target_gmm_file = datadirectory+'emd_1883.map.mrc.gmm.50.txt'
 
-#--------------------------
-# Set MC Sampling Parameters
-#--------------------------
-num_frames = 20000
-if '--test' in sys.argv: num_frames=100
-num_mc_steps = 10
-
-#--------------------------
-# Create movers
-#--------------------------
-
-# rigid body movement params
-rb_max_trans = 4.00
-rb_max_rot = 0.04
-
-# flexible bead movement
-bead_max_trans = 4.00
-
-# each list contains list of domain names (from topology) that move together
-#  flexible beads are automatically added to missing regions and sampled
-rigid_bodies = [["Rpb4"],
-                ["Rpb7"]]
-super_rigid_bodies = [["Rpb4","Rpb7"]]
-chain_of_super_rigid_bodies = [["Rpb4"],
-                               ["Rpb7"]]
-#
-################################################
-#
-
-#--------------------------------
-# Build the Model Representation
-#--------------------------------
-
 # Initialize model
 m = IMP.Model()
 
-# Create list of components from topology file
-topology = IMP.pmi.topology.TopologyReader(topology_file)
-domains = topology.component_list
+# Read in the topology file.
+# Specify the directory wheere the PDB files, fasta files and GMM files are
+topology = IMP.pmi.topology.TopologyReader(topology_file,
+                                  pdb_dir=datadirectory,
+                                  fasta_dir=datadirectory,
+                                  gmm_dir=datadirectory)
 
+# Use the BuildSystem macro to build states from the topology file
+bs = IMP.pmi.macros.BuildSystem(m)
 
-bm = IMP.pmi.macros.BuildModel(m,
-                    component_topologies=domains,
-                    list_of_rigid_bodies=rigid_bodies,
-                    list_of_super_rigid_bodies=super_rigid_bodies,
-                    chain_of_super_rigid_bodies=chain_of_super_rigid_bodies)
-representation = bm.get_representation()
+# Each state can be specified by a topology file.
+bs.add_state(topology)
 
-# add colors to the components
-for nc,component in enumerate(domains):
-    name = component.name
-    sel = IMP.atom.Selection(representation.prot,molecule=name)
-    ps = sel.get_selected_particles()
-    clr = IMP.display.get_rgb_color(float(nc)/len(domains))
-    for p in ps:
-        if not IMP.display.Colored.get_is_setup(p):
-            IMP.display.Colored.setup_particle(p,clr)
-        else:
-            IMP.display.Colored(p).set_color(clr)
+# Build the system representation and degrees of freedom
+root_hier, dof = bs.execute_macro(max_rb_trans=4.0,
+                                  max_rb_rot=0.3,
+                                  max_bead_trans=4.0,
+                                  max_srb_trans=4.0,
+                                  max_srb_rot=0.3)
 
+# Fix all rigid bodies but not Rpb4 and Rpb7 (the stalk)
+# First select and gather all particles to fix.
+fixed_particles=[]
+for prot in ["Rpb1","Rpb2","Rpb3","Rpb5","Rpb6","Rpb8","Rpb9","Rpb10","Rpb11","Rpb12"]:
+    fixed_particles+=IMP.atom.Selection(root_hier,molecule=prot).get_selected_particles()
 
-# Randomize the initial configuration before sampling
-representation.shuffle_configuration(50)
+# Fix the Corresponding Rigid movers and Super Rigid Body movers using dof
+# The flexible beads will still be flexible (fixed_beads is an empty list)!
+fixed_beads,fixed_rbs=dof.disable_movers(fixed_particles,
+                                         [IMP.core.RigidBodyMover,
+                                          IMP.pmi.TransformMover])
 
-#--------------------------
-# Define Degrees of Freedom
-#--------------------------
-
-# Add default mover parameters to simulation
-representation.set_rigid_bodies_max_rot(rb_max_rot)
-representation.set_floppy_bodies_max_trans(bead_max_trans)
-representation.set_rigid_bodies_max_trans(rb_max_trans)
+# Randomize the initial configuration before sampling, of only the molecules
+# we are interested in (Rpb4 and Rpb7)
+IMP.pmi.tools.shuffle_configuration(root_hier,
+                                    excluded_rigid_bodies=fixed_rbs,
+                                    max_translation=50,
+                                    verbose=False,
+                                    cutoff=5.0,
+                                    niterations=100)
 
 outputobjects = [] # reporter objects (for stat files)
-sampleobjects = [] # sampling objects
-
-# Add the movers to the sample and output object lists
-outputobjects.append(representation)
-sampleobjects.append(representation)
 
 #-----------------------------------
 # Define Scoring Function Components
@@ -128,18 +94,24 @@ sampleobjects.append(representation)
 #  For all of them we call add_to_model() so they are incorporated into scoring
 #  We also add them to the outputobjects list, so they are reported in stat files
 
+# Connectivity keeps things connected along the backbone (ignores if inside
+# same rigid body)
+mols = IMP.pmi.tools.get_molecules(root_hier)
+for mol in mols:
+    molname=mol.get_name()
+    IMP.pmi.tools.display_bonds(mol)
+    cr = IMP.pmi.restraints.stereochemistry.ConnectivityRestraint(mol,scale=2.0)
+    cr.add_to_model()
+    cr.set_label(molname)
+    outputobjects.append(cr)
 
 # Excluded Volume Restraint
 #  To speed up this expensive restraint, we operate it at resolution 20
 ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(
-                                         representation, resolution=20)
+                                         included_objects=root_hier,
+                                         resolution=10)
 ev.add_to_model()
 outputobjects.append(ev)
-
-
-#### optimize a bit before adding the EM restraint
-representation.optimize_floppy_bodies(10)
-####
 
 # Electron Microscopy Restraint
 #  The GaussianEMRestraint uses a density overlap function to compare model to data
@@ -148,7 +120,8 @@ representation.optimize_floppy_bodies(10)
 #   Other options: scale_to_target_mass ensures the total mass of model and map are identical
 #                  slope: nudge model closer to map when far away
 #                  weight: experimental, needed becaues the EM restraint is quasi-Bayesian
-em_components = bm.get_density_hierarchies([t.domain_name for t in domains])
+em_components = IMP.pmi.tools.get_densities(root_hier)
+
 gemt = IMP.pmi.restraints.em.GaussianEMRestraint(em_components,
                                                  target_gmm_file,
                                                  scale_target_to_mass=True,
@@ -160,10 +133,18 @@ outputobjects.append(gemt)
 #--------------------------
 # Monte-Carlo Sampling
 #--------------------------
+
+#--------------------------
+# Set MC Sampling Parameters
+#--------------------------
+num_frames = 20000
+if '--test' in sys.argv: num_frames=100
+num_mc_steps = 10
+
 # This object defines all components to be sampled as well as the sampling protocol
 mc1=IMP.pmi.macros.ReplicaExchange0(m,
-                                    representation,
-                                    monte_carlo_sample_objects=sampleobjects,
+                                    root_hier=root_hier,
+                                    monte_carlo_sample_objects=dof.get_movers(),
                                     output_objects=outputobjects,
                                     monte_carlo_temperature=1.0,
                                     simulated_annealing=True,
