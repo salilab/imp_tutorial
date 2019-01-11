@@ -9,5 +9,5 @@ IMP is a tool to generate structural models based on multiple sources of experim
 _Last known good IMP version_: [![build info](https://salilab.org/imp/systems/?sysstat=7&branch=master)](https://integrativemodeling.org/systems/) [![build info](https://salilab.org/imp/systems/?sysstat=7&branch=develop)](https://integrativemodeling.org/systems/)
 
 ### Running the Tutorial
-See [the IMP website](https://integrativemodeling.org/tutorials/rnapolii_stalk/pmi2/)
+See [the IMP website](https://integrativemodeling.org/tutorials/rnapolii_stalk/)
 for the tutorial text.
