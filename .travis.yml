@@ -10,6 +10,7 @@ python:
   - 3.7
 env:
   - IMP_BRANCH=develop
+  - IMP_BRANCH=master
 install:
   - support/tutorial_tools/setup_travis.sh $HOME/conda $IMP_BRANCH $TRAVIS_PYTHON_VERSION
   - source $HOME/conda/bin/activate python$TRAVIS_PYTHON_VERSION
