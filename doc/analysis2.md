@@ -1,7 +1,6 @@
 Stage 4 - Analysis Part 2 {#analysis2}
 =========================
 
-## Post-clustering analysis
 In this stage we perform post-clustering analysis.  Here, we will perform calculations for:
 
 * **Cluster Precision**: Determining the within-group precision and between-group similarity via RMSD
@@ -146,3 +145,16 @@ If you set this keyword to a tuple (values are percentages, e.g. [0,0.5]), it wi
 * quantitative analysis: combine the cluster results into one folder (rename as needed) and call `precision_rmsf.py`, which will automatically compute cross-precision for the clusters. 
 
 If the sampling is exhaustive, then similar clusters should be obtained from each independent set, and the inter-cluster precision between two equivalent clusters should be very low (that is, there should be a 1:1 correspondence between the two sets of clusters, though the ordering may be different).
+
+### Next steps
+
+Once the sampling and analysis is complete, it may be clear from the results
+that more experimental data is needed (or perhaps adjustments to the modeling
+protocol need to be made). In this case another cycle of the
+[integrative modeling procedure](@ref procedure) may be necessary.
+
+Alternatively, the study may be complete and ready for publication.
+Typically this would be accompanied by the deposition of the modeling study
+in the [PDB-Dev database](https://pdb-dev.wwpdb.org/) in mmCIF format; see the
+[deposition tutorial](https://integrativemodeling.org/tutorials/deposition/develop/)
+for more information.
