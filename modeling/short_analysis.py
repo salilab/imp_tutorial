@@ -12,7 +12,7 @@ import warnings
 warnings.filterwarnings('ignore')
 # ### Using `StatHierarchyHandler` for inline analysis <a name="ProcessOutput_3"></a>
 # 
-# We can use the class StatHierarchyHandler to analyse and plot the content of the stat files.
+# We can use the class StatHierarchyHandler to analyse and plot the content of the rmf files.
 # First, we print all the keywords. This class coordinates the structures that have been generated 
 # and all the features that have been saved during the modeling run. It is a Hierarchy object, but it works like a list.
 # The python script can be found in `modeling/short_analysis.py`.
@@ -22,7 +22,7 @@ warnings.filterwarnings('ignore')
 
 import IMP.pmi.output
 
-hh=IMP.pmi.output.StatHierarchyHandler(m,"./output/stat.0.out")
+hh=IMP.pmi.output.StatHierarchyHandler(m,"./output/rmfs/0.rmf3")
 
 print("number of frames",len(hh))
 
@@ -57,7 +57,7 @@ ps=IMP.atom.Selection(hh).get_selected_particles()
 plot([IMP.atom.get_radius_of_gyration(ps) for h in hh])
 
 
-# Next, we plot the time series of selected features stored in the Stat files
+# Next, we plot the time series of selected features stored in the rmf file
 
 # In[ ]:
 

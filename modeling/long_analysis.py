@@ -36,7 +36,7 @@ warnings.filterwarnings('ignore')
 
 
 are=IMP.pmi.macros.AnalysisReplicaExchange(m,
-                 ["./output/stat.0.out"],
+                 ["./output/rmfs/0.rmf3"],
                  best_models=100,
                  alignment=False)
 
@@ -165,7 +165,7 @@ are.save_densities(cluster=best_cluster,density_custom_ranges=density_names,pref
 are.save_densities(cluster=are[0],density_custom_ranges=density_names,prefix="Cluster-0")
 
 
-# We can compute the global contact map of the whole complex.
+# We can compute the global contact map of the whole complex for the second cluster.
 
 # In[ ]:
 
