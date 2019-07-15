@@ -24,12 +24,14 @@ import IMP.pmi.output
 
 hh=IMP.pmi.output.StatHierarchyHandler(m,"./output/rmfs/0.rmf3")
 
-print("number of frames",len(hh))
+#Total number of frames
+print("Frames",len(hh))
 
-print("describe the content of the stat file", hh[1])
+# Describe the content of the first frame of the rmf file
+print(hh[0])
 
-#list down all the feature names
-for k in hh[1].features.keys(): print(k)
+#list down all the features names
+for k in hh[0].features.keys(): print(k)
     
 
 
@@ -47,12 +49,12 @@ p1=IMP.atom.Selection(hh,molecule="Rpb7",residue_index=10).get_selected_particle
 d0=IMP.core.XYZ(p0)
 d1=IMP.core.XYZ(p1)
 
+#note that hh can be used as a list
 plot([IMP.core.get_distance(d0,d1) for h in hh]);
 
 figure()
 
 # Or we can get the radius of gyration of the whole complex
-
 ps=IMP.atom.Selection(hh).get_selected_particles()
 plot([IMP.atom.get_radius_of_gyration(ps) for h in hh])
 
@@ -62,17 +64,18 @@ plot([IMP.atom.get_radius_of_gyration(ps) for h in hh])
 # In[ ]:
 
 
-#first we store the data internal to hh, so that it is now read from the files
+# To reduce I/O, we can store the data structure internal to hh, 
+# so that it is not read directly from the files
 # and it is faster
 
 data=hh.data
 
-# then we plot the scores
+# Then we plot the scores
 plot([x.score for x in data])
 
 figure() 
 
-# finally we plot distances of two crosslinks
+# finally we plot the crosslink score and the distance of two crosslinked residues
 plot([float(x.features["CrossLinkingMassSpectrometryRestraint_Data_Score_Chen"]) for x in data]);
 plot([float(x.features["CrossLinkingMassSpectrometryRestraint_Distance_|Trnka|103.1|Rpb1|1|Rpb1|343|0|PSI|"]) for x in data]);
 

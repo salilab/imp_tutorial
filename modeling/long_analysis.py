@@ -60,13 +60,15 @@ are.cluster(30.0)
 # In[ ]:
 
 
+# see the contant of the "are" object
 print(are)
 
+#print the cluster info
 for cluster in are:
     print(cluster)
 
 
-# We can get a given cluster by using the square bracket, as in lists, for instance `are[1]` is the cluster with index 1. Using the list properties of the object `are`, we get the best scoring cluster.
+# We can get a given cluster by using the square bracket, as in lists, for instance `are[0]` is the cluster with index 0. Using the list properties of the object `are`, we get the best scoring cluster.
 
 # In[ ]:
 
@@ -83,10 +85,10 @@ print(best_cluster)
 # In[ ]:
 
 
-for member in best_cluster:
+for member in are[0]:
     print(member)
     
-are.save_coordinates(best_cluster)
+are.save_coordinates(are[0])
 
 
 # Next we can examine the distances between all cluster members. A plot is output to a single file in the clustering directory. The first plot is the distance matrix of the models after being grouped into clusters. 
@@ -110,9 +112,9 @@ are.plot_rmsd_matrix("rmsd_matrix.pdf")
 # In[ ]:
 
 
-are.compute_cluster_center(cluster=best_cluster)
-print(are.precision(cluster=best_cluster))
-print(are.bipartite_precision(cluster1=best_cluster,cluster2=are[0]))
+are.compute_cluster_center(cluster=are[0])
+print(are.precision(cluster=are[0]))
+print(are.bipartite_precision(cluster1=are[0],cluster2=are[1]))
 
 
 # We can plot the root mean square fluctuation (rmsf) of a given molecule in a given cluster.
@@ -120,11 +122,11 @@ print(are.bipartite_precision(cluster1=best_cluster,cluster2=are[0]))
 # In[ ]:
 
 
-rmsf1=are.rmsf(cluster=best_cluster,molecule='Rpb4');
+rmsf1=are.rmsf(cluster=are[0],molecule='Rpb4');
 plot(rmsf1.keys(),rmsf1.values())
 figure()
 
-rmsf2=are.rmsf(cluster=best_cluster,molecule='Rpb7');
+rmsf2=are.rmsf(cluster=are[0],molecule='Rpb7');
 plot(rmsf2.keys(),rmsf2.values())
 
 
@@ -136,10 +138,10 @@ plot(rmsf2.keys(),rmsf2.values())
 
 
 for mol in ['Rpb1','Rpb2','Rpb3','Rpb4','Rpb5','Rpb6','Rpb7','Rpb8','Rpb9','Rpb10','Rpb11','Rpb12']: 
-    are.rmsf(cluster=best_cluster,molecule=mol);
+    are.rmsf(cluster=are[0],molecule=mol);
 ch1=IMP.pmi.tools.ColorHierarchy(are.stath1)
 ch1.color_by_uncertainty()
-are.save_coordinates(best_cluster)
+are.save_coordinates(are[0])
 
 
 # We can save the localization densities of a given cluster, for given groups of molecules.
@@ -161,8 +163,9 @@ density_names={"REST":["Rpb1","Rpb2","Rpb3","Rpb5","Rpb6","Rpb8","Rpb9","Rpb10",
      "Rpb7":["Rpb7"],
      "Rpb1-200-300":[(200,300,"Rpb1")]}
 
-are.save_densities(cluster=best_cluster,density_custom_ranges=density_names,prefix="BestCluster")
-are.save_densities(cluster=are[0],density_custom_ranges=density_names,prefix="Cluster-0")
+# you can iterate on the clusters
+for n,a in enumerate(are):
+    are.save_densities(cluster=a,density_custom_ranges=density_names,prefix="Cluster-"+str(n))
 
 
 # We can compute the global contact map of the whole complex for the second cluster.
@@ -171,7 +174,7 @@ are.save_densities(cluster=are[0],density_custom_ranges=density_names,prefix="Cl
 
 
 # it is slow
-are.contact_map(cluster=are[1]);
+are.contact_map(cluster=are[0]);
 
 
 # ### Accuracy evaluation <a name="Accuracy_3"></a>
@@ -191,8 +194,7 @@ print(are)
 # In[ ]:
 
 
-print(are[-1].members)
-are.bipartite_precision(cluster1=best_cluster,cluster2=are[-1])
+print(are.bipartite_precision(cluster1=are[0],cluster2=are[-1]))
 
 
 # ### Sampling Exhaustiveness <a name="Sampling_Exhaustiveness_3"></a>
