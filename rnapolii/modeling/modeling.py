@@ -22,7 +22,6 @@ import IMP.pmi.restraints.crosslinking
 import IMP.pmi.restraints.stereochemistry
 import IMP.pmi.restraints.em
 import IMP.pmi.restraints.basic
-import IMP.pmi.representation
 import IMP.pmi.tools
 import IMP.pmi.samplers
 import IMP.pmi.output
