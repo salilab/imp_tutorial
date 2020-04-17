@@ -7,7 +7,7 @@ language: python
 dist: xenial
 python:
   - 2.7
-  - 3.7
+  - 3.8
 env:
   - IMP_BRANCH=develop
   - IMP_BRANCH=master
