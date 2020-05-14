@@ -9,7 +9,7 @@ The `rnapolii/data` folder in the tutorial input files contains the data include
 * Sequence information (FASTA files for each subunit)
 * [Electron density maps](http://www.ebi.ac.uk/pdbe/entry/EMD-1883/visualization) (`.mrc`, `.txt` files)
 * [High resolution structure from x-ray crystallography](http://www.rcsb.org/pdb/explore/explore.do?structureId=1WCM) (PDB file)
-* Chemical crosslinking datasets (we use two data sets, one from [Al Burlingame's lab](http://www.mcponline.org/content/13/2/420.long), and another from [Juri Rappsilber's lab](http://emboj.embopress.org/content/29/4/717))
+* Chemical cross-linking datasets (we use two data sets, one from [Al Burlingame's lab](http://www.mcponline.org/content/13/2/420.long), and another from [Juri Rappsilber's lab](http://emboj.embopress.org/content/29/4/717))
 
 
 **FASTA File**  

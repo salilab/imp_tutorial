@@ -159,9 +159,9 @@ outputobjects.append(ev)
 The excluded volume restraint is calculated at resolution 10 (20 residues per bead).
 
 
-**Crosslinks**
+**Cross-links**
 
-A crosslinking restraint is implemented as a distance restraint between two
+A cross-linking restraint is implemented as a distance restraint between two
 residues (for more information, see the
 [cross-linking tutorial](https://integrativemodeling.org/tutorials/cross_linking/)).
 The two residues are each defined by the protein (component) name and the residue number.  The script here extracts the correct four columns that provide this information from the [input data file](@ref rnapolii_1).
@@ -188,11 +188,11 @@ xl1 = IMP.pmi.restraints.crosslinking.CrossLinkingMassSpectrometryRestraint(
 xl1.add_to_model()
 \endcode
 
-An object `xl1` for this crosslinking restraint is created and then added to the model.
-* `length`: The maximum length of the crosslink
+An object `xl1` for this cross-linking restraint is created and then added to the model.
+* `length`: The maximum length of the cross-link
 * `slope`: Slope of linear energy function added to sigmoidal restraint
 * `resolution`: The resolution at which the restraint is evaluated. 1 = residue level
-* `label`: A label for this set of cross links - helpful to identify them later in the stat file
+* `label`: A label for this set of cross-links - helpful to identify them later in the stat file
 
 **EM Restraint**
 

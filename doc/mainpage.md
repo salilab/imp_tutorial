@@ -58,7 +58,7 @@ The rnapolii example contains three directories: `analysis`, `data` and
 
 # Integrative Modeling using IMP {#usingimp}
 
-This example will use data from chemical cross linking, EM and x-ray crystallography to localize the two subunits of the RNA Polymerase II stalk (Rpb4, Rpb7) to a static core of the remaining ten subunits.  
+This example will use data from chemical cross-linking, EM and x-ray crystallography to localize the two subunits of the RNA Polymerase II stalk (Rpb4, Rpb7) to a static core of the remaining ten subunits.  
 
 \image html rnapolii_integrative.png width=600px
 
