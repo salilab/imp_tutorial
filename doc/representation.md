@@ -161,7 +161,10 @@ The excluded volume restraint is calculated at resolution 10 (20 residues per be
 
 **Crosslinks**
 
-A crosslinking restraint is implemented as a distance restraint between two residues.  The two residues are each defined by the protein (component) name and the residue number.  The script here extracts the correct four columns that provide this information from the [input data file](@ref rnapolii_1).
+A crosslinking restraint is implemented as a distance restraint between two
+residues (for more information, see the
+[cross-linking tutorial](https://integrativemodeling.org/tutorials/cross_linking/)).
+The two residues are each defined by the protein (component) name and the residue number.  The script here extracts the correct four columns that provide this information from the [input data file](@ref rnapolii_1).
 
 \code{.py}
 xldbkwc = IMP.pmi.io.crosslink.CrossLinkDataBaseKeywordsConverter()
