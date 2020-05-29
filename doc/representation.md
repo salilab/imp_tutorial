@@ -183,6 +183,7 @@ xl1 = IMP.pmi.restraints.crosslinking.CrossLinkingMassSpectrometryRestraint(
                                    slope=0.01,
                                    resolution=1.0,
                                    label="Trnka",
+                                   linker=ihm.cross_linkers.dss,
                                    weight=1.)
 
 xl1.add_to_model()
@@ -193,6 +194,11 @@ An object `xl1` for this cross-linking restraint is created and then added to th
 * `slope`: Slope of linear energy function added to sigmoidal restraint
 * `resolution`: The resolution at which the restraint is evaluated. 1 = residue level
 * `label`: A label for this set of cross-links - helpful to identify them later in the stat file
+* `linker`: The chemistry of the cross-linking reagent, as an [ihm.ChemDescriptor](https://python-ihm.readthedocs.io/en/latest/main.html#ihm.ChemDescriptor)
+object. Descriptions of some commonly-used reagents are provided in the
+[ihm.cross\_linkers](https://python-ihm.readthedocs.io/en/latest/cross_linkers.html)
+module. In this case, the [DSS](https://en.wikipedia.org/wiki/Disuccinimidyl_suberate)
+cross-linker was used.
 
 **EM Restraint**
 
