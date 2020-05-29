@@ -178,7 +178,7 @@ xl1db.create_set_from_file(datadirectory+'polii_xlinks.csv')
 
 xl1 = IMP.pmi.restraints.crosslinking.CrossLinkingMassSpectrometryRestraint(
                                    root_hier=root_hier,
-                                   CrossLinkDataBase=xl1db,
+                                   database=xl1db,
                                    length=21.0,
                                    slope=0.01,
                                    resolution=1.0,
