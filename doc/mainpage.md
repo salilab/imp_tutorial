@@ -45,8 +45,8 @@ the packages using the distribution's package manager, such as `yum` or
 `apt-get`.)
 
 Then download the input files, either by 
-[cloning the GitHub repository](https://github.com/salilab/imp_tutorial/tree/master)
-or by [downloading the zip file](https://github.com/salilab/imp_tutorial/archive/master.zip).
+[cloning the GitHub repository](https://github.com/salilab/imp_tutorial/tree/main)
+or by [downloading the zip file](https://github.com/salilab/imp_tutorial/archive/main.zip).
 
 The rnapolii example contains three directories: `analysis`, `data` and
 `modeling`.
