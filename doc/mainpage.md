@@ -27,7 +27,7 @@ packages installed in addition to [IMP itself](@ref installation):
 - [scikit-learn](http://scikit-learn.org/stable/install.html)
   for k-means clustering
 
-- [matplotlib](http://matplotlib.org/downloads.html)
+- [matplotlib](https://matplotlib.org/downloads.html)
   for plotting results
 
 - [Chimera](https://www.cgl.ucsf.edu/chimera/download.html)
