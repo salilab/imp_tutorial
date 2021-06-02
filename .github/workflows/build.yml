@@ -13,13 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        python-version: [2.7, 3.8, 3.9]
+        python-version: [2.7, 3.9]
         imp-branch: [main, develop]
-        exclude:
-          - python-version: 3.8
-            imp-branch: develop
-          - python-version: 3.9
-            imp-branch: main
     runs-on: ${{ matrix.os }}
 
     steps:
