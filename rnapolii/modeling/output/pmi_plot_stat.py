@@ -5,6 +5,7 @@
 import optparse
 import IMP.pmi.output
 
+
 class StatFileProcessor(object):
     def __init__(self, fname):
         self.fname = fname
@@ -38,10 +39,11 @@ class StatFileProcessor(object):
             return 'Frame', 'Frame'
         try:
             field_id = int(field_name)
-            return fid_to_field_name[field_id], field_id
+            return id_to_field_name[field_id], field_id
         except ValueError:
             pass
         return field_name, field_name_to_id[field_name]
+
 
 def parse_args():
     usage = """%prog [options] <stat file>
@@ -64,6 +66,7 @@ Simple script to plot data from IMP/PMI stat files.
         parser.error("Incorrect number of arguments")
     return opts, args[0]
 
+
 def main():
     opts, statfile = parse_args()
     f = StatFileProcessor(statfile)
@@ -73,6 +76,7 @@ def main():
                                 [o[1] for o in outs[opts.begin:]],
                                 out_fn="%s-%s" % (xlabel, ylabel),
                                 xlabel=xlabel, ylabel=ylabel)
+
 
 if __name__ == '__main__':
     main()
