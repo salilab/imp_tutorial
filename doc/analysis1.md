@@ -6,7 +6,7 @@ In the analysis stage we cluster (group by similarity) the sampled models to det
 
 ### Precomputed results
 
-A long modeling run was precomputed and analyzed. You can [download](ftp://salilab.org/tutorials/imp/rnapolii/results.tar.gz) it from our website, and you can [download](ftp://salilab.org/tutorials/imp/rnapolii/analysis.tar.gz) the corresponding analysis.
+A long modeling run was precomputed and analyzed. You can [download](https://salilab.org/ftp/tutorials/imp/rnapolii/results.tar.gz) it from our website, and you can [download](https://salilab.org/ftp/tutorials/imp/rnapolii/analysis.tar.gz) the corresponding analysis.
 
 ### Clustering top models (clustering.py)
 The `clustering.py` script, found in the `rnapolii/analysis` directory, calls the [AnalysisReplicaExchange0](@ref IMP::pmi::macros::AnalysisReplicaExchange0) macro, which finds top-scoring models, extracts coordinates, runs k-means clustering, and does basic cluster analysis including creating localization densities for each subunit. The script generates a directory containing as many subdirectories as the number of clusters queried. Each subdirectory contains an RMF and a PDB for each structure extracted, a stat file, and the localization densities.
