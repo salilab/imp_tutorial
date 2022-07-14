@@ -13,6 +13,7 @@ TOPDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
                                       '..', 'rnapolii'))
 RESULTS = "https://salilab.org/ftp/tutorials/imp/rnapolii/results.tar.gz"
 
+
 class Tests(unittest.TestCase):
 
     def clean_output(self):
@@ -50,7 +51,6 @@ class Tests(unittest.TestCase):
         self.assertTrue(os.path.exists('kmeans_5_1/precision.0.0.out'))
 
         subprocess.check_call(["python", 'accuracy.py'])
-
 
     def test_complete(self):
         """Test modeling and analysis"""
