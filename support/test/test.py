@@ -12,6 +12,7 @@ import tarfile
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
                                       '..', 'rnapolii'))
 RESULTS = "https://salilab.org/ftp/tutorials/imp/rnapolii/results.tar.gz"
+ANALYSIS = "https://salilab.org/ftp/tutorials/imp/rnapolii/analysis.tar.gz"
 
 
 class Tests(unittest.TestCase):
@@ -52,6 +53,20 @@ class Tests(unittest.TestCase):
         # Test analysis
         subprocess.check_call(["python", 'precision_rmsf.py'])
         self.assertTrue(os.path.exists('kmeans_5_1/precision.0.0.out'))
+
+        subprocess.check_call(["python", 'accuracy.py'])
+
+    @unittest.skipIf(sys.version_info[0] == 2,
+                     "Needs urllib.request from Python 3")
+    def test_accuracy_of_precomputed_analysis(self):
+        """Make sure that precomputed analysis can be checked for accuracy"""
+        import urllib.request
+        self.clean_output()
+        os.chdir(os.path.join(TOPDIR, 'analysis'))
+        # Get and extract precomputed analysis
+        with urllib.request.urlopen(ANALYSIS) as fh:
+            with tarfile.open(fileobj=fh, mode='r:gz') as tf:
+                tf.extractall()
 
         subprocess.check_call(["python", 'accuracy.py'])
 
