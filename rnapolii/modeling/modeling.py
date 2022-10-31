@@ -103,9 +103,8 @@ for mol in mols:
     molname = mol.get_name()
     IMP.pmi.tools.display_bonds(mol)
     cr = IMP.pmi.restraints.stereochemistry.ConnectivityRestraint(
-        mol, scale=2.0)
+        mol, scale=2.0, label=molname)
     cr.add_to_model()
-    cr.set_label(molname)
     outputobjects.append(cr)
 
 # Excluded Volume Restraint
