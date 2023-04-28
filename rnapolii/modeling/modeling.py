@@ -202,7 +202,7 @@ num_mc_steps = 10
 
 # This object defines all components to be sampled as well as the
 # sampling protocol
-mc1 = IMP.pmi.macros.ReplicaExchange0(
+mc1 = IMP.pmi.macros.ReplicaExchange(
     m, root_hier=root_hier, monte_carlo_sample_objects=dof.get_movers(),
     output_objects=outputobjects, monte_carlo_temperature=1.0,
     simulated_annealing=True, simulated_annealing_minimum_temperature=1.0,

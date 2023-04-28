@@ -13,28 +13,28 @@ num_mc_steps = 10
 
 MC sampling parameters define the number of frames (model structures) which will be output during sampling. `num_mc_steps` defines the number of Monte Carlo steps between output frames.  This setup would therefore encompass 200000 MC steps in total. 
 
-Next, a replica exchange run can be set up using the [ReplicaExchange0](@ref IMP::pmi::macros::ReplicaExchange0) macro:
+Next, a replica exchange run can be set up using the [ReplicaExchange](@ref IMP::pmi::macros::ReplicaExchange) macro:
 
 \code{.py}
-mc1=IMP.pmi.macros.ReplicaExchange0(m,
-                                    root_hier=root_hier,
-                                    monte_carlo_sample_objects=dof.get_movers(),
-                                    output_objects=outputobjects,
-                                    monte_carlo_temperature=1.0,
-                                    simulated_annealing=True,
-                                    simulated_annealing_minimum_temperature=1.0,
-                                    simulated_annealing_maximum_temperature=2.5,
-                                    simulated_annealing_minimum_temperature_nframes=200,
-                                    simulated_annealing_maximum_temperature_nframes=20,
-                                    replica_exchange_minimum_temperature=1.0,
-                                    replica_exchange_maximum_temperature=2.5,
-                                    number_of_best_scoring_models=100,
-                                    monte_carlo_steps=num_mc_steps,
-                                    number_of_frames=num_frames,
-                                    global_output_directory="output")
+mc1=IMP.pmi.macros.ReplicaExchange(m,
+                                   root_hier=root_hier,
+                                   monte_carlo_sample_objects=dof.get_movers(),
+                                   output_objects=outputobjects,
+                                   monte_carlo_temperature=1.0,
+                                   simulated_annealing=True,
+                                   simulated_annealing_minimum_temperature=1.0,
+                                   simulated_annealing_maximum_temperature=2.5,
+                                   simulated_annealing_minimum_temperature_nframes=200,
+                                   simulated_annealing_maximum_temperature_nframes=20,
+                                   replica_exchange_minimum_temperature=1.0,
+                                   replica_exchange_maximum_temperature=2.5,
+                                   number_of_best_scoring_models=100,
+                                   monte_carlo_steps=num_mc_steps,
+                                   number_of_frames=num_frames,
+                                   global_output_directory="output")
 \endcode
 
-See the [ReplicaExchange0 documentation](@ref IMP::pmi::macros::ReplicaExchange0.__init__)
+See the [ReplicaExchange documentation](@ref IMP::pmi::macros::ReplicaExchange.__init__)
 for a full description of all of the input parameters.
 
 The sampling is performed by executing the macro built above:
