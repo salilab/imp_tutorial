@@ -79,7 +79,7 @@ of the Rigid Body mover, `max_srb_trans` and `max_srb_rot` are the maximum
 translation and rotation of the Super Rigid Body mover and `max_bead_trans`
 is the maximum translation of the Bead Mover.
 
-The excecution of the macro will return the root hierarchy (`root_hier`)
+The execution of the macro will return the root hierarchy (`root_hier`)
 and the degrees of freedom (`dof`) objects, both of which are used later on.
 
 \code{.py}

@@ -177,7 +177,7 @@ outputobjects.append(xl2)
 #  Other options:
 #    scale_to_target_mass ensures the total mass of model and map are identical
 #    slope: nudge model closer to map when far away
-#    weight: experimental, needed becaues the EM restraint is quasi-Bayesian
+#    weight: experimental, needed because the EM restraint is quasi-Bayesian
 em_components = IMP.pmi.tools.get_densities(root_hier)
 
 gemt = IMP.pmi.restraints.em.GaussianEMRestraint(em_components,
