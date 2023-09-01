@@ -50,8 +50,7 @@ topology = IMP.pmi.topology.TopologyReader(topology_file,
                                            gmm_dir=datadirectory)
 
 # Use the BuildSystem macro to build states from the topology file
-bs = IMP.pmi.macros.BuildSystem(
-    m, name="Modeling of the stalk of the RNA Polymerase II complex")
+bs = IMP.pmi.macros.BuildSystem(m)
 
 # Each state can be specified by a topology file.
 bs.add_state(topology)
