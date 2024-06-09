@@ -13,12 +13,16 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        python-version: ["2.7", "3.12"]
+        python-version: ["3.12"]
         imp-branch: [main, develop]
+        include:
+        - os: [ubuntu-latest]
+          python-version: "2.7"
+          imp-branch: main
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - name: Setup conda
