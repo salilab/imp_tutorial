@@ -15,17 +15,19 @@ The `rnapolii/data` folder in the tutorial input files contains the data include
 **FASTA File**  
 Each residue included in modeling must be explicitly defined in the FASTA text file.  Each individual component (i.e., a protein chain) is identified by a string in the FASTA header line.  From `1WCM.fasta.txt`:
 
-    >1WCM:A
+    >1WCM:A|P04050
     MVGQQYSSAPLRTVKEVQFGLFSPEEVRAISVAKIRFPETMDETQTRAKIGGLNDPRLGSIDRNLKCQTCQEGMNECPGH
     FGHIDLAKPVFHVGFIAKIKKVCECVCMHCGKLLLDEHNELMRQALAIKDSKKRFAAIWTLCKTKMVCETDVPSEDDPTQ  
     ...
 
-    >1WCM:B
+    >1WCM:B|P08518
     MSDLANSEKYYDEDPYGFEDESAPITAEDSWAVISAFFREKGLVSQQLDSFNQFVDYTLQDIICEDSTLILEQLAQHTTE
     SDNISRKYEISFGKIYVTKPMVNESDGVTHALYPQEARLRNLTYSSGLFVDVKKRTYEAIDVPGRELKYELIAEESEDDS  
     ...
 
-defines two chains with unique IDs of 1WCM:A and 1WCM:B respectively.  The entire complex is 12 chains and 4582 residues.
+defines two chains with unique IDs of 1WCM:A and 1WCM:B respectively. The remainder of the FASTA header (after the | character) can be used to state the UniProt accession of the sequence, if the sequence is in UniProt. (This is not absolutely required, and the accession is not used directly in the modeling, but it does simplify deposition of any final models.)
+
+The entire complex is 12 chains and 4582 residues.
 
 **Electron Density Map**  
 The electron density map of the entire RNA Poly II complex is at 20.9 Angstrom resolution.  The raw data file for this is stored in `emd_1883.map.mrc`.
