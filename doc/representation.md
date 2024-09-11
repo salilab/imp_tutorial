@@ -37,7 +37,7 @@ target_gmm_file = datadirectory+'emd_1883.map.mrc.gmm.50.txt'
 \endcode
 
 The first section defines where input files are located.  The
-[topology file](https://github.com/salilab/imp_tutorial/blob/pmi2/rnapolii/data/topology.txt)
+[topology file](https://github.com/salilab/imp_tutorial/blob/main/rnapolii/data/topology.txt)
 defines how the system components are structurally represented. `target_gmm_file` stores the EM map for the entire complex, which has already been converted into a Gaussian mixture model.
 
 **Build the Model Representation Using a Topology File**
