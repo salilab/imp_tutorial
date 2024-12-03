@@ -155,6 +155,6 @@ protocol need to be made). In this case another cycle of the
 
 Alternatively, the study may be complete and ready for publication.
 Typically this would be accompanied by the deposition of the modeling study
-in the [PDB-Dev database](https://pdb-dev.wwpdb.org/) in mmCIF format; see the
+in the [PDB-IHM database](https://pdb-ihm.org/) in mmCIF format; see the
 [deposition tutorial](https://integrativemodeling.org/tutorials/deposition/develop/)
 for more information.
