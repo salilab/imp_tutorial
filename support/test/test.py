@@ -40,7 +40,10 @@ class Tests(unittest.TestCase):
         # Get and extract precomputed results
         with urllib.request.urlopen(RESULTS) as fh:
             with tarfile.open(fileobj=fh, mode='r:gz') as tf:
-                tf.extractall()
+                if hasattr(tarfile, 'data_filter'):
+                    tf.extractall(filter='data')
+                else:
+                    tf.extractall()
         for subdir in os.listdir('results/output'):
             shutil.move('results/output/%s' % subdir, '../modeling/output/')
 
@@ -62,7 +65,10 @@ class Tests(unittest.TestCase):
         # Get and extract precomputed analysis
         with urllib.request.urlopen(ANALYSIS) as fh:
             with tarfile.open(fileobj=fh, mode='r:gz') as tf:
-                tf.extractall()
+                if hasattr(tarfile, 'data_filter'):
+                    tf.extractall(filter='data')
+                else:
+                    tf.extractall()
 
         subprocess.check_call(["python", 'accuracy.py'])
 
