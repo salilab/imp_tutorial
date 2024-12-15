@@ -2,12 +2,12 @@
 
 import unittest
 import os
-import sys
 import glob
 import shutil
 import subprocess
 import tarfile
 import pickle
+import urllib.request
 import IMP
 
 
@@ -33,11 +33,8 @@ class Tests(unittest.TestCase):
                                              'kmeans_*_*')):
             shutil.rmtree(subdir, ignore_errors=False)
 
-    @unittest.skipIf(sys.version_info[0] == 2,
-                     "Needs urllib.request from Python 3")
     def test_analysis_on_precomputed(self):
         """Make sure that analysis works on precomputed results"""
-        import urllib.request
         self.clean_output()
         os.chdir(os.path.join(TOPDIR, 'analysis'))
         # Get and extract precomputed results
@@ -58,11 +55,8 @@ class Tests(unittest.TestCase):
 
         subprocess.check_call(["python", 'accuracy.py'])
 
-    @unittest.skipIf(sys.version_info[0] == 2,
-                     "Needs urllib.request from Python 3")
     def test_accuracy_of_precomputed_analysis(self):
         """Make sure that precomputed analysis can be checked for accuracy"""
-        import urllib.request
         self.clean_output()
         os.chdir(os.path.join(TOPDIR, 'analysis'))
         # Get and extract precomputed analysis
