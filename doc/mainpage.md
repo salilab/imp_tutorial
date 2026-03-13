@@ -21,10 +21,10 @@ complex. The example can be easily generalized to any other set of subunits.
 To work through the example on your own system, you will need the following
 packages installed in addition to [IMP itself](@ref installation):
 
-- [numpy and scipy](http://www.scipy.org/scipylib/download.html)
+- [numpy](https://numpy.org/install/) and [scipy](https://scipy.org/install/)
   for matrix and linear algebra
 
-- [scikit-learn](http://scikit-learn.org/stable/install.html)
+- [scikit-learn](https://scikit-learn.org/stable/install.html)
   for k-means clustering
 
 - [matplotlib](https://matplotlib.org/downloads.html)
