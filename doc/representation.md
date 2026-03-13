@@ -9,6 +9,7 @@ parameters.
 ### Setting up Model Representation in IMP
 
 **Representation** 
+
 Very generally, the *representation* of a system is defined by all the variables that need to be determined based on input information, including the assignment of the system components to geometric objects (e.g. points, spheres, ellipsoids, and 3D Gaussian density functions). 
 
 Our RNA Pol II representation employs *spherical beads* of varying sizes and *3D Gaussians*, which coarsen domains of the complex using several resolution scales simultaneously. The *spatial restraints* will be applied to individual resolution scales as appropriate. 
@@ -22,9 +23,11 @@ The GMM of a subunit is the set of all 3D Gaussians used to represent it; it wil
 For the purposes of this tutorial, we already created these for Rpb4 and Rpb7 and placed them in the `rnapolii/data` directory in their respective `.mrc` and `.txt` files. 
 
 **Dissecting the script**
+
 The script `rnapolii/modeling/modeling.py` sets up the representation of the system and the restraint. (Subsequently it also performs [sampling](@ref rnapolii_3), but more on that later.)
 
 **Header**  
+
 The first part of the script defines the files used in model building and restraint generation.
 
 \code{.py}
@@ -41,6 +44,7 @@ The first section defines where input files are located.  The
 defines how the system components are structurally represented. `target_gmm_file` stores the EM map for the entire complex, which has already been converted into a Gaussian mixture model.
 
 **Build the Model Representation Using a Topology File**
+
 Using the topology file we define the overall topology: we introduce the
 molecules with their sequence and their known structure, and define the movers.
 Each line in the file is a user-defined molecular **Domain**, and each column
@@ -134,6 +138,7 @@ IMP.pmi.tools.shuffle_configuration(root_hier,
 After defining the representation of the model, we build the restraints by which the individual structural models will be scored based on the input data.
 
 **Connectivity Restraint**
+
 \code{.py}
 # Connectivity keeps things connected along the backbone (ignores if inside
 # same rigid body)
@@ -148,6 +153,7 @@ for mol in mols:
 \endcode
 
 **Excluded Volume Restraint**
+
 \code{.py}
 ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(
                                          included_objects=root_hier,
