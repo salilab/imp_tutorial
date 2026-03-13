@@ -30,8 +30,9 @@ packages installed in addition to [IMP itself](@ref installation):
 - [matplotlib](https://matplotlib.org/downloads.html)
   for plotting results
 
-- [Chimera](https://www.cgl.ucsf.edu/chimera/download.html)
-  for visualization of results
+- [ChimeraX](https://www.cgl.ucsf.edu/chimerax/download.html) with the
+  RMF plugin (install it from the ChimeraX toolshed using the
+  Tools/More Tools... menu in ChimeraX) for visualization of results
 
 (If you are using [Anaconda Python](https://www.anaconda.com/download/),
 you can get the Python packages above by simply running
