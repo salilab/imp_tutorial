@@ -52,17 +52,17 @@ The script generates an `output` directory containing the following:
 
 **Gathering Data from statfile**  
 Data from the stat file can be parsed and analyzed using two utilities: 
-* `process_output.py` - parses the statfile and returns columns of interest
+* `IMP.pmi.process_output` - parses the statfile and returns columns of interest
 * `plot_stat.sh` - plots one or two columns of data (requires [gnuplot](http://www.gnuplot.info/download.html)) 
 
 `process_output.py` usage:
 
 \code{.sh}
-IMP_HOME/modules/pmi/pyext/process_output.py [-h] [-f FILENAME] [-s FIELDS [FIELDS ...]]
-                                             [-t SINGLE_COLUMN_FIELD] [-p] [--head]
-                                             [-n PRINT_RAW_NUMBER] [--soft]
-                                             [--search_field SEARCH_FIELD]
-                                             [--search_value SEARCH_VALUE] [--nframe]
+python3 -m IMP.pmi.process_output [-h] [-f FILENAME] [-s FIELDS [FIELDS ...]]
+                                  [-t SINGLE_COLUMN_FIELD] [-p] [--head]
+                                  [-n PRINT_RAW_NUMBER] [--soft]
+                                  [--search_field SEARCH_FIELD]
+                                  [--search_value SEARCH_VALUE] [--nframe]
 \endcode
 
 `plot_stat.sh` usage: 
