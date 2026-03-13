@@ -38,8 +38,7 @@ you can get the Python packages above by simply running
 `conda install numpy scipy scikit-learn matplotlib`.
 On a Mac you can get them using the
 [pip](https://pypi.python.org/pypi/pip) tool, e.g. by running a command like
-`sudo easy_install pip`, then install the packages with something like
-`sudo pip install scikit-learn; sudo pip install matplotlib`. `numpy` and `scipy` are already installed on modern Macs. Something
+`pip install numpy scipy scikit-learn matplotlib`. Something
 similar may also work on a Linux box, although it's probably better to install
 the packages using the distribution's package manager, such as `yum` or
 `apt-get`.)
