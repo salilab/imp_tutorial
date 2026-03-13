@@ -12,7 +12,7 @@ In this stage we perform post-clustering analysis.  Here, we will perform calcul
 The `precision_rmsf.py` script can be used to determine the within- and between-cluster RMSD (i.e., precision). To run, use:
 
 \code{.sh}
-python precision_rmsf.py
+python3 precision_rmsf.py
 \endcode
 It will generate `precision.*.*.out` files in the `kmeans*` subdirectory containing precision information in text format, while in each cluster directory it generates `.pdf` files showing the within-cluster residue mean square fluctuation. In a similar way to earlier scripts, subsets of the structure can be selected for the calculation - in this case, we select the Rpb4 and Rpb7 subunits.
 
@@ -88,7 +88,7 @@ We have provided a script to evaluate the accuracy of a model against a native c
 To run, use
 
 \code{.sh}
-python accuracy.py
+python3 accuracy.py
 \endcode
 
 First, identify the reference structure and list of `.rmf` structures to use in calculation

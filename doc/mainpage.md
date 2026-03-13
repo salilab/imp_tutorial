@@ -86,13 +86,13 @@ Click the links below to see a breakdown of all the modeling steps.
 The first three modeling stages are all contained within one script, `modeling.py`. You can get started by simply changing into the `rnapolii/modeling` directory and then running the script with Python:
 
 \code{.sh}
-python modeling.py
+python3 modeling.py
 \endcode
 
 It will take a very long time to complete the sampling; to get an idea of what's going on you can run it with only 100 output frames by adding the `--test` option:
 
 \code{.sh}
-python modeling.py --test
+python3 modeling.py --test
 \endcode
 
 [On to stage 1...](@ref gatherdata)

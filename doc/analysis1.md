@@ -85,7 +85,7 @@ mc.clustering(prefiltervalue=prefiltervalue,                   # prefilter the m
 Run the clustering script by changing into the `rnapolii/analysis` directory and then running:
 
 \code{.sh}
-python clustering.py
+python3 clustering.py
 \endcode
 
 If you ran `modeling.py` with the `--test` option, it is a good idea to give the `--test` option to `clustering.py` as well (this increases the prefilter value; none of the 100 test models generated may be good enough to satisfy the default prefilter value). With such minimal sampling, the quality of the results is unlikely to be high; you can download [the precalculated results](ftp://salilab.org/tutorials/imp/rnapolii/results.tar.gz) and the [resulting clusters](ftp://salilab.org/tutorials/imp/rnapolii/analysis.tar.gz) from our website.
