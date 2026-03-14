@@ -138,13 +138,10 @@ you will get something like:
 The average distance is the average RMSD of each model in the cluster with respect to the reference structure. The program prints values for all selections (`Rpb4`, `Rpb7` and `Rpb4_Rpb7`) and automatically for all the complex (`All`)
 
 ### Sampling Exhaustiveness
-We can also determine sampling exhaustiveness by dividing the models into multiple sets, performing clustering on each set separately, and comparing the clusters. This step is left as an exercise to the reader. To aid with splitting the data, we have added the optional keyword `first_and_last_frames` to the IMP::pmi::macros::AnalysisReplicaExchange0::clustering() method.
-If you set this keyword to a tuple (values are percentages, e.g. [0,0.5]), it will only analyze that fraction of the data. Some things you can try:
-* cluster two subsets of the data
-* qualitative analysis: look at the localization densities - they should be similar for the two subsets
-* quantitative analysis: combine the cluster results into one folder (rename as needed) and call `precision_rmsf.py`, which will automatically compute cross-precision for the clusters. 
-
-If the sampling is exhaustive, then similar clusters should be obtained from each independent set, and the inter-cluster precision between two equivalent clusters should be very low (that is, there should be a 1:1 correspondence between the two sets of clusters, though the ordering may be different).
+We can also determine sampling exhaustiveness by dividing the models into multiple sets, performing clustering on each set separately, and comparing the clusters. If the sampling is exhaustive, then similar clusters should be obtained from each independent set, and the inter-cluster precision between two equivalent clusters should be very low (that is, there should be a 1:1 correspondence between the two sets of clusters, though the ordering may be different).
+This test is handled by the [IMP.sampcon module](@ref IMP::sampcon),
+described in [Viswanath et al, 2017](https://pubmed.ncbi.nlm.nih.gov/29211988/).
+For a demonstration of the method, see the [actin complex modeling tutorial](https://integrativemodeling.org/tutorials/actin/analysis.html).
 
 ### Next steps
 
